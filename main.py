@@ -1,5 +1,5 @@
 print("hello lucas!")
-
+print("YOLO fk java")
 print("HiimLucas")
 
 print("hej")
