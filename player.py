@@ -26,7 +26,7 @@ class Player():
         """
         return self._name
 
-    def set_age(self, new_name: str):
+    def set_name(self, new_name: str):
         """
         SET THE PLAYER NAME WHEN ENTERED
         """
@@ -56,9 +56,9 @@ class Player():
         """
         self._color = new_color
 
-    def make_play(dice.Dice): # Måste lösas
+    def make_play(self, dice: Dice):
         """
-        PLAYER MAKE A MOVE TO ROLL DICE AND 
+        PLAYER MAKE A MOVE TO ROLL DICE AND
         RUTURN OBTAINED SCORE
         """
         print("Rolling the dice... ")
