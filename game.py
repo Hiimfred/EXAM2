@@ -49,3 +49,6 @@ class Game:
     def get_score_to_win(self):
         """Return the score needed to win the game."""
         return self._score_to_win
+
+    def get_score_left(self, score: int):
+        return self._score_to_win - score

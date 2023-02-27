@@ -1,4 +1,5 @@
-from colorama import FORE, BACK, STYLE
+# Commented out stuff that caused errors, did not remove anything.
+# from colorama import FORE, BACK, STYLE
 from dice import Dice
 
 
@@ -9,8 +10,8 @@ class Player():
     CONTAINS GETTERS AND SETTERS FOR NAME, SCORE AND COLOR
     AND A CLASS MAKE_PLAY FOR THE PLAYER TO MAKE A MOVE IN THE GAME
     """
-
-    def __init__(self, total_score: int, current_score: int, name: str, color: FORE):
+    # Removed this from _init_ arg ", color: FORE", caused error.
+    def __init__(self, total_score: int, current_score: int, name: str):
         """
         DEFAULT PLAYER BLUEPRINT
         """
@@ -18,7 +19,7 @@ class Player():
         self._total_score = total_score
         self._current_score = current_score
         self._name = name
-        self._color = color
+        # self._color = color
 
     def get_name(self):
         """
@@ -62,6 +63,6 @@ class Player():
         RUTURN OBTAINED SCORE
         """
         print("Rolling the dice... ")
-        result = Dice.roll_dice
-        current_score += result
-        return current_score
+        # result = Dice.roll_dice
+        # current_score += result
+        # return current_score

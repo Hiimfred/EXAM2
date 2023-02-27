@@ -61,56 +61,89 @@ class Intelligence:
         else:
             raise ValueError("Difficulty value needs to be integer 1 or 2.")
 
-    def make_play(self, dice: Dice, player_opponent: Player, game: Game):
-        """Initiate the NPCs turn."""
+    def make_play(self, dice: Dice, player: Player, game: Game):
+        """
+        Initiate the NPCs turn.
+
+        There is two difficulty settings, EASY and HARD.
+        The npc set to EASY will always throw two times
+        while the NPC set to HARD will try to adapt
+        its playstyle depending on factors like:
+        Oponents score, the NPCs score,
+        how many points there are left until someone wins
+        and who is in the lead.
+        """
         _rolls_this_turn = 0
         self._turn_score = 0
         _run = True
+        throws = "Not set"
+        score_left = "Not set"
+
+        op_score = player.get_total_score()
+        npc_score = self.get_total_score()
+        op_lead = player.get_total_score() - self.get_total_score()
+        npc_lead = self.get_total_score() - player.get_total_score()
+        if (op_score > npc_score):
+            score_left = game.get_score_left(op_score)
+        else:
+            score_left = game.get_score_left(npc_score)
+
+        percentage_10 = round(game.get_score_to_win() * 0.1)
+        percentage_20 = round(game.get_score_to_win() * 0.2)
+        percentage_30 = round(game.get_score_to_win() * 0.3)
+        percentage_50 = round(game.get_score_to_win() * 0.5)
 
         if (self._difficulty_setting is Difficulty.EASY):
-            while (self._total_score < 100 and _rolls_this_turn < 6 and _run):
+            throws = 2
 
-                outcome_e = dice.roll_dice()
-                _rolls_this_turn += 1
-
-                if (outcome_e != 1):
-                    print(f"{self._name} rolled a {outcome_e}..")
-                    self._turn_score += outcome_e
-                else:
-                    self._turn_score = 0
-                    _run = False
         elif (self._difficulty_setting is Difficulty.HARD):
-            # Variables to shorten the length of if-statements.
-            s = dice.get_number_of_sides()
-            w = game.get_score_to_win()
-            o = player_opponent.get_total_score()
-            p = self.get_total_score()
+            if (npc_score == 0):
+                throws = 3
+            elif (score_left < percentage_20):
+                if (op_lead >= percentage_10):
+                    throws = 9
+                elif (npc_lead >= percentage_10):
+                    throws = 5
+                else:
+                    throws = 7
+            elif (score_left < percentage_30):
+                if (op_lead >= percentage_10):
+                    throws = 7
+                elif (npc_lead >= percentage_10):
+                    throws = 4
+                else:
+                    throws = 6
+            elif (score_left < percentage_50):
+                if (op_lead >= percentage_10):
+                    throws = 5
+                elif (npc_lead >= percentage_10):
+                    throws = 3
+                else:
+                    throws = 4
+            else:
+                if (op_lead >= percentage_20):
+                    throws = 6
+                elif (npc_lead >= percentage_20):
+                    throws = 3
+                elif (op_lead >= percentage_10):
+                    throws = 5
+                elif (npc_lead >= percentage_10):
+                    throws = 4
+                else:
+                    throws = 3
 
-            while (self._total_score < 100 and _run):
+        while (_rolls_this_turn < throws and _run):
+            outcome_h = dice.roll_dice()
+            _rolls_this_turn += 1
+            print(f"{self._name} rolled a {outcome_h}..")
 
-                outcome_h = dice.roll_dice()
-                _rolls_this_turn += 1
+            if (outcome_h != 1):
+                self._turn_score += outcome_h
+            else:
+                self._turn_score = 0
+                _run = False
 
-                # Change inside of if statements to show how many
-                # times to loop and then put while-loop after.
-                if (outcome_h == 1):
-                    self._turn_score = 0
-                    _run = False
-                elif (p == 0 and outcome_h >= round(s * 0.6)):
-                    self._turn_score += outcome_h
-                    _run = False
-                elif (o > round(w * 0.5) and (o - p) >= round(w * 0.2)):
-                    self._turn_score += outcome_h
-                    if (_rolls_this_turn > 3):
-                        _run = False
-                elif (p - o) >= round(w * 0.3):
-                    self._turn_score += outcome_h
-                    if (_rolls_this_turn >= 2):
-                        _run = False
-                elif (o > (w * 0.4) and (o - p) <= round(w * 0.9)):
-                    self._turn_score += outcome_h
-                    _run = False
-                elif (o - p) >= round(w * 0.8) and o >= round(w * 0.8):
-                    self._turn_score += outcome_h
+            if (self._total_score + self._turn_score >= 100):
+                _run = False
 
         self._total_score += self._turn_score
