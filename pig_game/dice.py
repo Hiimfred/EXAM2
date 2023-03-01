@@ -1,4 +1,5 @@
 """Contains Dice class."""
+
 import random
 
 
