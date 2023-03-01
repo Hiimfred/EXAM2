@@ -10,6 +10,8 @@ class Player():
     AND A CLASS MAKE_PLAY FOR THE PLAYER TO MAKE A MOVE IN THE GAME.
     """
 
+    color_list = ["red", "blue", "green", "magenta", "yellow", "cyan"]
+
     def __init__(self, name: str, color: str):
         """DEFAULT PLAYER BLUEPRINT."""
 
@@ -48,7 +50,12 @@ class Player():
 
     def set_color(self, new_color):
         """SETS THE PLAYERS CHOSEN COLOR."""
-        self._color = new_color
+        new_color = str.lower(new_color)
+        if (new_color in self.color_list):
+            self._color = new_color
+        else:
+            raise ValueError("Enter on of the following colors: " +
+                             "red, blue, green, magenta, yellow, cyan")
 
     def roll(self, dice: Dice):
         """
