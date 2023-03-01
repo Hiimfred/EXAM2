@@ -1,8 +1,6 @@
 """Contains Shell class."""
 import cmd
 import game
-from player import Player
-from intelligence import Intelligence
 
 
 class Shell(cmd.Cmd):
@@ -20,16 +18,26 @@ class Shell(cmd.Cmd):
         super().__init__()
         self.game = game.Game()
 
-    def do_start(self, arg1, arg2):
-        nr_args = len(self.args)
-        err_msg = "There needs to be atleast one player."
-
-        if (nr_args < 1 or nr_args > 2):
-            print(err_msg)
+    def do_solo(self, arg):
+        msg = "One argument required: Player1 name"
+        if not arg:
+            print(msg)
             return
-        elif (nr_args == 1):
-            self.Player1 = Player(arg1, "blue")
-            self.NPC = Intelligence()
         else:
-            self.Player1 = Player(arg1, "blue")
-            self.Player2 = Player(arg2, "red")
+            self.game.start_solo_game(arg)
+
+    def do_multiplayer(self, arg1, arg2):
+        msg = "Two arguments required: Player1 and Player2 names"
+        args = len(self.args)
+
+        if (args != 2):
+            print(msg)
+            return
+        else:
+            self.game.start_multiplayer_game(arg1, arg2)
+
+    def do_roll(self):
+        ...
+
+    def do_hold(self):
+        ...
