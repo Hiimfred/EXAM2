@@ -12,16 +12,14 @@ class Intelligence:
     Contains variables and methods regarding the NPC and its behaviour.
     """
 
-    def __init__(self, name: str, color):
+    def __init__(self, name: str):
         """Initiate a default Intelligence object with a name and a color."""
         self._total_score = 0
         self._turn_score = 0
-        self._difficulty_setting = Difficulty.HARD
+        self._difficulty_setting = Difficulty.EASY
         self._name = name
-        # Not sure how to handle the color picking yet.
-        self._color = color
-        # Here a method that somehow uses the choosen color
-        # when the NPC´s name is displayed needs to be inserted.
+        # What should the default color be for NPC?
+        self._color = "green"
 
     def set_name(self, name: str):
         """Set a new name for this Intelligence object."""
@@ -31,7 +29,7 @@ class Intelligence:
         """Return the name of this Intelligence object."""
         return self._name
 
-    def get_score(self):
+    def get_turn_score(self):
         """Return the current score for this Intelligence object."""
         return self._turn_score
 
@@ -39,7 +37,7 @@ class Intelligence:
         """Return the total score for this Intelligence object."""
         return self._total_score
 
-    def set_color(self, color):
+    def set_color(self, color: str):
         """Set a new color for this Intelligence object."""
         self._color = color
 
@@ -53,10 +51,7 @@ class Intelligence:
 
         If the argument is not in the correct range a ValueError is raised.
         """
-        if (difficulty > 0 and difficulty < 3):
-            # Not sure that this will work as intended.
-            # Trying to set the diffculty_setting acording
-            # to the input number.
+        if (difficulty == 1 or difficulty == 2):
             self._difficulty_setting = Difficulty(difficulty)
         else:
             raise ValueError("Difficulty value needs to be integer 1 or 2.")
@@ -79,6 +74,8 @@ class Intelligence:
         throws = "Not set"
         score_left = "Not set"
 
+        # This is variables to make the if-statements
+        # (Starting at line 96) shorter and more readable.
         op_score = player.get_total_score()
         npc_score = self.get_total_score()
         op_lead = player.get_total_score() - self.get_total_score()
@@ -93,9 +90,15 @@ class Intelligence:
         percentage_30 = round(game.get_score_to_win() * 0.3)
         percentage_50 = round(game.get_score_to_win() * 0.5)
 
+        # The EASY NPC always throws 2 times.
         if (self._difficulty_setting is Difficulty.EASY):
             throws = 2
 
+        # The HARD NPC atempts to play smarter
+        # and adapt to certain senarios.
+
+        # Here the number of throws the NPC
+        # should make is determined.
         elif (self._difficulty_setting is Difficulty.HARD):
             if (npc_score == 0):
                 throws = 3
@@ -132,13 +135,22 @@ class Intelligence:
                 else:
                     throws = 3
 
-        while (_rolls_this_turn < throws and _run):
-            outcome_h = dice.roll_dice()
-            _rolls_this_turn += 1
-            print(f"{self._name} rolled a {outcome_h}..")
+        # This is where the NPCs rolls the dice.
+        # The throws value set erlier decides
+        # how many times the NPC will roll the dice.
 
-            if (outcome_h != 1):
-                self._turn_score += outcome_h
+        # The outcome is also checked in the loop to
+        # see if a 1 is thrown. If it is then the score
+        # this turn is set to 0 and the loop is closed.
+        # If the total score equals or exceeds 100 the
+        # loop is also closed.
+        while (_rolls_this_turn < throws and _run):
+            outcome = dice.roll_dice()
+            _rolls_this_turn += 1
+            print(f"{self._name} rolled a {outcome}..")
+
+            if (outcome != 1):
+                self._turn_score += outcome
             else:
                 self._turn_score = 0
                 _run = False
@@ -146,4 +158,4 @@ class Intelligence:
             if (self._total_score + self._turn_score >= 100):
                 _run = False
 
-        self._total_score += self._turn_score
+        self._total_score += self.get_turn_score()

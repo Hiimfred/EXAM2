@@ -8,11 +8,7 @@ class Game:
     Contains variables and methods related to the game itself.
     """
 
-    # Might need to add more variables here later.
-    # Should the dice/player/intelligence- objects be passed
-    # as arguments here or somewhere else?
-    # Easier to decide when the shell is in place.
-    def __init__(self, number_of_players: int):
+    def __init__(self):
         """
         Initiate a game with default settings.
 
@@ -20,20 +16,18 @@ class Game:
         computer or two players against eachother.
         Settings can be changed after the game is initialized.
         """
-        if (number_of_players > 0 and number_of_players < 3):
-            self._number_of_players = number_of_players
-        else:
-            raise ValueError("Invalid input. There can only be 1-2 players.")
-
+        self._number_of_players = 1
         self._score_to_win = 100
         self._number_of_die = 1
-        # Not sure how to implement a change in backroundcolor
-        # but it might not be that difficult.
-        self._backround_color = "Default"
+        # magenta as default for text?
+        self._text_color = "magenta"
+
+    def start(self):
+        """Start the game."""
 
     def set_number_of_players(self, number_of_players: int):
         """Change the number of players in the game."""
-        if (number_of_players > 0 and number_of_players < 3):
+        if (number_of_players == 1 or number_of_players == 2):
             self._number_of_players = number_of_players
         else:
             raise ValueError("Invalid input. There can only be 1-2 players.")
