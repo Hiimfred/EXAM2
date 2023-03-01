@@ -12,7 +12,7 @@ class Player():
     AND A CLASS MAKE_PLAY FOR THE PLAYER TO MAKE A MOVE IN THE GAME
     """
     # Removed this from _init_ arg ", color: FORE", caused error.
-    def __init__(self, total_score: int, current_score: int, name: str, color: str):
+    def __init__(self, name: str, color: str):
         """
         DEFAULT PLAYER BLUEPRINT
         """
