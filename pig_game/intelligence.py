@@ -12,14 +12,14 @@ class Intelligence:
     Contains variables and methods regarding the NPC and its behaviour.
     """
 
-    def __init__(self, name: str):
+    def __init__(self):
         """Initiate a default Intelligence object with a name and a color."""
         self._total_score = 0
         self._turn_score = 0
         self._difficulty_setting = Difficulty.EASY
-        self._name = name
+        self._name = "Bot"
         # What should the default color be for NPC?
-        self._color = "green"
+        self._color = "red"
 
     def set_name(self, name: str):
         """Set a new name for this Intelligence object."""

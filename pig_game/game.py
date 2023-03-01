@@ -1,4 +1,6 @@
 """Contains Game class."""
+from player import Player
+from intelligence import Intelligence
 
 
 class Game:
@@ -22,8 +24,11 @@ class Game:
         # magenta as default for text?
         self._text_color = "magenta"
 
-    def start(self):
-        """Start the game."""
+    def player_vs_player(player1: Player, player2: Player):
+        ...
+
+    def solo_play(player1: Player, NPC: Intelligence):
+        ...
 
     def set_number_of_players(self, number_of_players: int):
         """Change the number of players in the game."""
