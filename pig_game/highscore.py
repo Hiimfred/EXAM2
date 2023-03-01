@@ -17,3 +17,8 @@ class Highscore:
 
     def getbot_score(self):
         return self.bot_score
+
+    def print_scoreboard(self):
+        print(f"Scoreboard for {self.player_name}")
+        print(f"{self.player_name}: {self.getplayer_score()}")
+        print(f"{self.bot_name}: {self.getbot_score()}")
