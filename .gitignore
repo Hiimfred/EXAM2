@@ -1,0 +1,12 @@
+.coverage
+.venv/
+__pycache__
+htmlcov/
+*.pyc
+dice/doc
+difficulty/doc
+game/doc
+highscore/doc
+intelligence/doc
+player/doc
+build/
