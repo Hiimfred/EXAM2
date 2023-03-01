@@ -1,3 +1,4 @@
+"""CONTAINS A PLAYER CLASS"""
 # Commented out stuff that caused errors, did not remove anything.
 # from colorama import FORE, BACK, STYLE
 from dice import Dice
@@ -11,15 +12,15 @@ class Player():
     AND A CLASS MAKE_PLAY FOR THE PLAYER TO MAKE A MOVE IN THE GAME
     """
     # Removed this from _init_ arg ", color: FORE", caused error.
-    def __init__(self, total_score: int, current_score: int, name: str):
+    def __init__(self, total_score: int, current_score: int, name: str, color: str):
         """
         DEFAULT PLAYER BLUEPRINT
         """
 
-        self._total_score = total_score
-        self._current_score = current_score
+        self._total_score = 0
+        self._current_score = 0
         self._name = name
-        # self._color = color
+        self._color = color
 
     def get_name(self):
         """
