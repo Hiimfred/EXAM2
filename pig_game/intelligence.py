@@ -18,7 +18,6 @@ class Intelligence:
         self._turn_score = 0
         self._difficulty_setting = Difficulty.EASY
         self._name = "Bot"
-        # What should the default color be for NPC?
         self._color = "red"
 
     def set_name(self, name: str):
@@ -144,14 +143,16 @@ class Intelligence:
         # this turn is set to 0 and the loop is closed.
         # If the total score equals or exceeds 100 the
         # loop is also closed.
+        list_of_outcomes = []
         while (_rolls_this_turn < throws and _run):
             outcome = dice.roll_dice()
             _rolls_this_turn += 1
-            print(f"{self._name} rolled a {outcome}..")
+            list_of_outcomes.append(outcome)
 
             if (outcome != 1):
                 self._turn_score += outcome
             else:
+                msg = f"{self.get_name} rolled a 1.. "
                 self._turn_score = 0
                 _run = False
 
@@ -159,3 +160,4 @@ class Intelligence:
                 _run = False
 
         self._total_score += self.get_turn_score()
+        return msg

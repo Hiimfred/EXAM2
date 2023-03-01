@@ -67,6 +67,7 @@ class Player():
         outcome = dice.roll_dice()
         if outcome == 1:
             self.set_score(0)
+            self.change_turn()
         else:
             self.set_score(self.get_score() + outcome)
 

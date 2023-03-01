@@ -1,6 +1,7 @@
 """Contains Game class."""
 from player import Player
 from intelligence import Intelligence
+from dice import Dice
 
 
 class Game:
@@ -9,6 +10,11 @@ class Game:
 
     Contains variables and methods related to the game itself.
     """
+    player1 = Player("Not set", "blue")
+    player2 = Player("Not set", "red")
+    Bot = Intelligence()
+    game_started = False
+    solo_game = True
 
     def __init__(self):
         """
@@ -20,14 +26,32 @@ class Game:
         """
         self._number_of_players = 1
         self._score_to_win = 100
-        self._number_of_die = 1
-        # magenta as default for text?
         self._text_color = "magenta"
+        self.die = Dice()
 
-    def player_vs_player(player1: Player, player2: Player):
+    def start_solo_game(self, name):
+        self.game_started = True
+        self.solo_game = True
+        self.player1.set_name(name)
+        return
+
+    def start_multiplayer_game(self, name1, name2):
+        self.game_started = True
+        self.solo_game = False
+        self.player1.set_name(name1)
+        self.player2.set_name(name2)
+        return
+
+    def initiate_roll(self):
+        if (self.solo_game):
+            self.solo_roll()
+        else:
+            self.multiplayer_roll()
+
+    def solo_roll(self):
         ...
 
-    def solo_play(player1: Player, NPC: Intelligence):
+    def multiplayer_roll(self):
         ...
 
     def set_number_of_players(self, number_of_players: int):
