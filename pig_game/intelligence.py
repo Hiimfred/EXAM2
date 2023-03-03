@@ -2,7 +2,6 @@
 from dice import Dice
 from difficulty import Difficulty
 from player import Player
-from game import Game
 
 
 class Intelligence:
@@ -29,9 +28,15 @@ class Intelligence:
         """Return the name of this Intelligence object."""
         return self._name
 
+    def set_turn_score(self, score: int):
+        self._turn_score = score
+
     def get_turn_score(self):
         """Return the current score for this Intelligence object."""
         return self._turn_score
+
+    def set_total_score(self, total_score: int):
+        self._total_score = total_score
 
     def get_total_score(self):
         """Return the total score for this Intelligence object."""
@@ -56,7 +61,7 @@ class Intelligence:
         else:
             raise ValueError("Difficulty value needs to be integer 1 or 2.")
 
-    def make_play(self, player: Player, game: Game):
+    def make_play(self, player: Player):
         """
         Initiate the NPCs turn.
 
@@ -81,14 +86,9 @@ class Intelligence:
         op_lead = player.get_total_score() - self.get_total_score()
         npc_lead = self.get_total_score() - player.get_total_score()
         if (op_score > npc_score):
-            score_left = game.get_score_left(op_score)
+            score_left = 100 - op_score
         else:
-            score_left = game.get_score_left(npc_score)
-
-        percentage_10 = round(game.get_score_to_win() * 0.1)
-        percentage_20 = round(game.get_score_to_win() * 0.2)
-        percentage_30 = round(game.get_score_to_win() * 0.3)
-        percentage_50 = round(game.get_score_to_win() * 0.5)
+            score_left = 100 - npc_score
 
         # The EASY NPC always throws 2 times.
         if (self._difficulty_setting is Difficulty.EASY):
@@ -102,35 +102,35 @@ class Intelligence:
         elif (self._difficulty_setting is Difficulty.HARD):
             if (npc_score == 0):
                 throws = 3
-            elif (score_left < percentage_20):
-                if (op_lead >= percentage_10):
+            elif (score_left < 20):
+                if (op_lead >= 10):
                     throws = 9
-                elif (npc_lead >= percentage_10):
+                elif (npc_lead >= 10):
                     throws = 5
                 else:
                     throws = 7
-            elif (score_left < percentage_30):
-                if (op_lead >= percentage_10):
+            elif (score_left < 30):
+                if (op_lead >= 10):
                     throws = 7
-                elif (npc_lead >= percentage_10):
+                elif (npc_lead >= 10):
                     throws = 4
                 else:
                     throws = 6
-            elif (score_left < percentage_50):
-                if (op_lead >= percentage_10):
+            elif (score_left < 50):
+                if (op_lead >= 10):
                     throws = 5
-                elif (npc_lead >= percentage_10):
+                elif (npc_lead >= 10):
                     throws = 3
                 else:
                     throws = 4
             else:
-                if (op_lead >= percentage_20):
+                if (op_lead >= 20):
                     throws = 6
-                elif (npc_lead >= percentage_20):
+                elif (npc_lead >= 20):
                     throws = 3
-                elif (op_lead >= percentage_10):
+                elif (op_lead >= 10):
                     throws = 5
-                elif (npc_lead >= percentage_10):
+                elif (npc_lead >= 10):
                     throws = 4
                 else:
                     throws = 3

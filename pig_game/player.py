@@ -1,5 +1,5 @@
 """Contains a player class."""
-from pig_game.dice import Dice
+from dice import Dice
 
 
 class Player():
@@ -19,6 +19,7 @@ class Player():
         self._current_score = 0
         self._name = name
         self._color = color
+        self._wins = 0
 
     def get_name(self):
         """GET THE PLAYER NAME."""
@@ -57,6 +58,12 @@ class Player():
             raise ValueError("Enter on of the following colors: " +
                              "red, blue, green, magenta, yellow, cyan")
 
+    def add_win(self):
+        self._wins += 1
+
+    def get_nr_of_wins(self):
+        return self._wins
+
     def roll(self, dice: Dice):
         """
         PLAYER ROLL THE DICE
@@ -79,4 +86,7 @@ class Player():
         PLAYER HOLD AND ADDS THE CURRENT SCORE TO THE TOTAL SCORE
         """
         self.set_total_score(self.get_score() + self.get_total_score())
-        return self.get_total_score()
+        self.set_score(0)
+
+    def __str__(self):
+        return f"{self.get_name():^10} ---- {self.get_nr_of_wins():^10}"

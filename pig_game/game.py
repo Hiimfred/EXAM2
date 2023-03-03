@@ -11,10 +11,11 @@ class Game:
     Contains variables and methods related to the game itself.
     """
     # Probably need to initiate player/npc objects in do_solo/multiplayer.
-    _current_player = Player("Not set", "blue")
-    _pending_player = Player("Not set", "red")
+    _current_player = "Not Set"
+    _pending_player = "Not set"
     _bot = Intelligence()
     _game_started = False
+    _prior_game = False
     _winner = "Not set"
 
     def __init__(self):
@@ -28,7 +29,7 @@ class Game:
         self._number_of_players = 1
         self._score_to_win = 100
         self._text_color = "magenta"
-        self.die = Dice()
+        self._die = Dice()
 
     def set_number_of_players(self, number_of_players: int):
         """Change the number of players in the game."""
@@ -53,41 +54,44 @@ class Game:
         return self._score_to_win - score
 
     def start_solo_game(self, name):
-        self.game_started = True
-        self._current_player.set_name(name)
+        self._game_started = True
+        self._current_player = Player(name, "blue")
+        self._bot = Intelligence()
         self.set_number_of_players(1)
         return
 
     def start_multiplayer_game(self, name1, name2):
-        self.game_started = True
+        self._game_started = True
         self.set_number_of_players(2)
-        self._current_player.set_name(name1)
-        self._pending_player.set_name(name2)
+        self._current_player = Player(name1, "blue")
+        self._pending_player = Player(name2, "red")
         return
 
     def roll(self):
-        outcome = self._current_player.roll()
-        msg = f"{self._current_player.get_name()} rolled a {outcome}.."
-        return msg
+        outcome = 0
+        outcome = self._current_player.roll(self._die)
+        msg = f"\t{self._current_player.get_name()} rolled a {outcome}..\n"
+        return msg, outcome
 
     def begin_bot_turn(self):
+        outcome = 0
         msg = ""
 
-        outcomes = self._bot.make_play()
+        outcomes = self._bot.make_play(self._current_player)
         if (1 in outcomes):
-            msg = "The bot rolled a 1!"
+            msg = "\n\tThe bot rolled a 1"
         else:
-            msg = "The bot rolled "
+            msg = "\n\tThe bot rolled"
             for outcome in outcomes:
-                msg += f"{outcome}, "
-            msg += ".\n"
+                msg += f", {outcome}"
 
-        return msg + f"His score is now {self._bot.get_total_score()}!"
+        return msg + f". His score is now {self._bot.get_total_score()}!\n"
 
     def hold(self):
-        new_total = self._current_player.hold()
-        msg_p1 = "You choose to hold!"
-        msg_p2 = f" Your new total is {new_total}."
+        self._current_player.hold()
+        new_total = self._current_player.get_total_score()
+        msg_p1 = "\tYou choose to hold!"
+        msg_p2 = f" Your new total is {new_total}.\n"
 
         return msg_p1 + msg_p2
 
@@ -96,15 +100,16 @@ class Game:
         self._current_player = self._pending_player
         self._pending_player = temp
 
-        return f"Now it is {self._current_player}s turn to roll!"
+        return f"\n\tIt is your turn to roll{self._current_player.get_name()}!"
 
-    def check_for_winner(self):
+    def is_winner(self):
         _is_winner = False
         max_score = self.get_score_to_win()
 
         if (self._current_player.get_total_score() >= max_score):
             _is_winner = True
-            self._winner = self._pending_player
+            self._winner = self._current_player
+            self._current_player.add_win()
         elif (self._bot.get_total_score() >= max_score):
             _is_winner = True
             self._winner = self._bot
@@ -113,3 +118,32 @@ class Game:
 
     def get_winner(self):
         return self._winner
+
+    def get_current_player_name(self):
+        return self._current_player.get_name()
+
+    def game_is_running(self):
+        return self._game_started
+
+    def end_game(self):
+        self._game_started = False
+        self._prior_game = True
+
+    def is_prior_game(self):
+        return self._prior_game
+
+    def reset_game(self):
+        self._current_player.set_total_score(0)
+
+        if (self.get_number_of_players() == 1):
+            self._bot.set_total_score(0)
+        else:
+            self._pending_player.set_total_score(0)
+
+        self._game_started = True
+
+    def save_highscore(self):
+        ...
+
+    def load_highscore(self):
+        ...
