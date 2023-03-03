@@ -64,6 +64,9 @@ class Player():
     def get_nr_of_wins(self):
         return self._wins
 
+    def set_nr_of_wins(self, nr_wins: int):
+        self._wins = nr_wins
+
     def roll(self, dice: Dice):
         """
         PLAYER ROLL THE DICE

@@ -65,7 +65,6 @@ class Shell(cmd.Cmd):
                 winner = self.game.get_winner()
                 print(f"\t{winner.get_name()} won the game!!")
                 self.game.end_game()
-                self.game.reset_game()
             else:
                 print(msg)
 
@@ -87,7 +86,6 @@ class Shell(cmd.Cmd):
                 winner = self.game.get_winner()
                 print(f"\t{winner.get_name()} won the game!!")
                 self.game.end_game()
-                self.game.reset_game()
         else:
             swap_msg = self.game.pass_turn()
             self.prompt = f"({self.game.get_current_player_name()}) "

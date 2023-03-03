@@ -1,24 +1,30 @@
+from player import Player
+import pickle
+
+
 class Highscore:
     ''''Construktor for keeping the score '''
-    def __init__(self, player_name):
-        self.player_name = player_name
-        self.bot_name = "Bot"
-        self.player_score = 0
-        self.bot_score = 0
-    ''''getters and setters for the player and the bot'''
-    def setPlayer_score(self, score):
-        self.player_score += score
+    def __init__(self):
+        self._entries = []
 
-    def setBot_score(self, score):
-        self.bot_score += score
+    def add_entry(self, player: Player):
+        if (player not in self._entries):
+            self._entries.append(player)
+        else:
+            player_index = self._entries.index(player)
+            self._entries[player_index].set_nr_of_wins(player.get_nr_of_wins())
 
-    def getplayer_score(self):
-        return self.player_score
+    def save_highscore(self):
+        with open("highscore.bin", "wb") as file:
+            pickle.dump(self._entries, file)
 
-    def getbot_score(self):
-        return self.bot_score
+    def load_highscore(self):
+        with open("highscore.bin", "rb") as file:
+            self._entries = pickle.load(file)
 
-    def print_scoreboard(self):
-        print(f"Scoreboard for {self.player_name}")
-        print(f"{self.player_name}: {self.getplayer_score()}")
-        print(f"{self.bot_name}: {self.getbot_score()}")
+    def get_highscore(self):
+        highscore = ""
+        for entry in self._entries:
+            highscore += entry.__str__() + "\n"
+
+        return highscore

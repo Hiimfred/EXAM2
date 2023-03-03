@@ -2,6 +2,7 @@
 from player import Player
 from intelligence import Intelligence
 from dice import Dice
+from highscore import Highscore
 
 
 class Game:
@@ -10,7 +11,7 @@ class Game:
 
     Contains variables and methods related to the game itself.
     """
-    # Probably need to initiate player/npc objects in do_solo/multiplayer.
+    _highscore = Highscore()
     _current_player = "Not Set"
     _pending_player = "Not set"
     _bot = Intelligence()
@@ -142,8 +143,5 @@ class Game:
 
         self._game_started = True
 
-    def save_highscore(self):
-        ...
-
-    def load_highscore(self):
+    def display_highscore(self):
         ...
