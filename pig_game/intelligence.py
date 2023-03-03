@@ -11,12 +11,13 @@ class Intelligence:
 
     Contains variables and methods regarding the NPC and its behaviour.
     """
+    _die = Dice()
+    _total_score = 0
+    _turn_score = 0
+    _difficulty_setting = Difficulty.EASY
 
     def __init__(self):
         """Initiate a default Intelligence object with a name and a color."""
-        self._total_score = 0
-        self._turn_score = 0
-        self._difficulty_setting = Difficulty.EASY
         self._name = "Bot"
         self._color = "red"
 
@@ -55,7 +56,7 @@ class Intelligence:
         else:
             raise ValueError("Difficulty value needs to be integer 1 or 2.")
 
-    def make_play(self, dice: Dice, player: Player, game: Game):
+    def make_play(self, player: Player, game: Game):
         """
         Initiate the NPCs turn.
 
@@ -145,14 +146,13 @@ class Intelligence:
         # loop is also closed.
         list_of_outcomes = []
         while (_rolls_this_turn < throws and _run):
-            outcome = dice.roll_dice()
+            outcome = self._die.roll_dice()
             _rolls_this_turn += 1
             list_of_outcomes.append(outcome)
 
             if (outcome != 1):
                 self._turn_score += outcome
             else:
-                msg = f"{self.get_name} rolled a 1.. "
                 self._turn_score = 0
                 _run = False
 
@@ -160,4 +160,4 @@ class Intelligence:
                 _run = False
 
         self._total_score += self.get_turn_score()
-        return msg
+        return list_of_outcomes

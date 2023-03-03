@@ -37,7 +37,24 @@ class Shell(cmd.Cmd):
             self.game.start_multiplayer_game(arg1, arg2)
 
     def do_roll(self):
-        ...
+        msg = self.game.roll()
+        print(msg)
 
     def do_hold(self):
-        ...
+        hold_msg = self.game.hold()
+        print(hold_msg)
+
+        if (self.game.check_for_winner()):
+            winner = self.game.get_winner()
+            print(f"{winner.get_name()} won the game!!")
+
+        if (self.game.get_number_of_players() == 1):
+            bot_msg = self.game.begin_bot_turn()
+            print(bot_msg)
+
+            if (self.game.check_for_winner()):
+                winner = self.game.get_winner()
+                print(f"{winner.get_name()} won the game!!")
+        else:
+            swap_msg = self.game.pass_turn()
+            print(swap_msg)

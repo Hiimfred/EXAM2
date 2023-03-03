@@ -1,5 +1,5 @@
 """Contains a player class."""
-from dice import Dice
+from pig_game.dice import Dice
 
 
 class Player():
@@ -67,7 +67,6 @@ class Player():
         outcome = dice.roll_dice()
         if outcome == 1:
             self.set_score(0)
-            self.change_turn()
         else:
             self.set_score(self.get_score() + outcome)
 
@@ -80,3 +79,4 @@ class Player():
         PLAYER HOLD AND ADDS THE CURRENT SCORE TO THE TOTAL SCORE
         """
         self.set_total_score(self.get_score() + self.get_total_score())
+        return self.get_total_score()
