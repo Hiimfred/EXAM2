@@ -84,7 +84,7 @@ class Shell(cmd.Cmd):
 
             if (self.game.is_winner()):
                 winner = self.game.get_winner()
-                print(f"\t{winner.get_name()} won the game!!")
+                print(f"\t{winner.get_name()} won the game!!\n")
                 self.game.end_game()
         else:
             swap_msg = self.game.pass_turn()
@@ -94,8 +94,18 @@ class Shell(cmd.Cmd):
     def do_continue(self, _):
         if (self.game.is_prior_game() and not self.game.game_is_running()):
             self.game.reset_game()
-            msg = "\n\tThe game has been reset! You can now roll again."
+            msg = "\tThe game has been reset! You can now roll again.\n"
         else:
-            msg = "\n\tThere is no game to continue. Finish a game first!"
+            msg = "\tThere is no game to continue. Finish a game first!\n"
 
         print(msg)
+
+    def do_highscore(self, _):
+        msg = self.game.display_highscore()
+        print(msg)
+
+    def do_quit(self, _):
+        msg = "Thanks for playing!"
+        print(msg)
+        self.game.call_save_highscore()
+        return True

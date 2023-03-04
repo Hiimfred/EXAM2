@@ -101,16 +101,19 @@ class Game:
         self._current_player = self._pending_player
         self._pending_player = temp
 
-        return f"\n\tIt is your turn to roll{self._current_player.get_name()}!"
+        return f"\tYour turn to roll {self._current_player.get_name()}!\n"
 
     def is_winner(self):
         _is_winner = False
         max_score = self.get_score_to_win()
+        player_score = self._current_player.get_total_score()
+        player_score += self._current_player.get_score()
 
-        if (self._current_player.get_total_score() >= max_score):
+        if (player_score >= max_score):
             _is_winner = True
             self._winner = self._current_player
             self._current_player.add_win()
+            self._highscore.add_entry(self._current_player)
         elif (self._bot.get_total_score() >= max_score):
             _is_winner = True
             self._winner = self._bot
@@ -144,4 +147,12 @@ class Game:
         self._game_started = True
 
     def display_highscore(self):
-        ...
+        msg = "\tThere are no highscores.\n"
+
+        if (self._highscore.not_empty()):
+            return self._highscore.get_highscore()
+        else:
+            return msg
+
+    def call_save_highscore(self):
+        self._highscore.save_highscore()
