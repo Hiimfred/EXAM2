@@ -50,16 +50,12 @@ class Intelligence:
         """Return the color of this Intelligence object."""
         return self._color
 
-    def set_difficulty(self, difficulty: int):
-        """
-        Apply a new difficulty setting to this Intelligence object.
+    def set_difficulty(self, difficulty: Difficulty):
+        """Apply a new difficulty setting to this Intelligence object."""
+        self._difficulty_setting = difficulty
 
-        If the argument is not in the correct range a ValueError is raised.
-        """
-        if (difficulty == 1 or difficulty == 2):
-            self._difficulty_setting = Difficulty(difficulty)
-        else:
-            raise ValueError("Difficulty value needs to be integer 1 or 2.")
+    def get_difficulty(self):
+        return self._difficulty_setting
 
     def make_play(self, player: Player):
         """

@@ -3,6 +3,7 @@ from player import Player
 from intelligence import Intelligence
 from dice import Dice
 from highscore import Highscore
+from difficulty import Difficulty
 
 
 class Game:
@@ -156,3 +157,15 @@ class Game:
 
     def call_save_highscore(self):
         self._highscore.save_highscore()
+
+    def new_difficulty(self):
+        msg = ""
+
+        if (self._bot.get_difficulty() is Difficulty.EASY):
+            self._bot.set_difficulty(Difficulty.HARD)
+            msg = "\tBot difficulty set to HARD.\n"
+        else:
+            self._bot.set_difficulty(Difficulty.EASY)
+            msg = "\tBot difficulty set to EASY.\n"
+
+        return msg

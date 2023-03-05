@@ -14,11 +14,21 @@ class Shell(cmd.Cmd):
     prompt = "(game) "
 
     def __init__(self):
-        """Init the object."""
+        """Initiates the game object."""
         super().__init__()
         self.game = game.Game()
 
     def do_solo(self, arg):
+        """
+        Start a solo game, player vs bot.
+
+        Takes one argument, the name of the player.
+        """
+        # Takes one argument and that is the players name.
+        # If no argument is given then a message is printed.
+        # Starts a solo game.
+        # The prompt is set to the players name.
+
         msg = "One argument required: Player1 name"
         if not arg:
             print(msg)
@@ -28,6 +38,16 @@ class Shell(cmd.Cmd):
             self.prompt = f"({arg}) "
 
     def do_multiplayer(self, arg: str):
+        """
+        Start a multiplayer game, player vs player.
+
+        Takes two arguments, the names of the two players.
+        """
+        # Takes two arguments, the names of the two players.
+        # If no two arguments are given a message is printed.
+        # Starts a multiplayer game.
+        # The prompt is set to the first players name.
+
         args = arg.split()
         nr_args = len(args)
 
@@ -40,8 +60,22 @@ class Shell(cmd.Cmd):
             self.prompt = f"({args[0]})"
 
     def do_roll(self, _):
+        """
+        If a game is running then roll the current players dice.
+
+        Will pass the turn if a 1 is rolled and end the game if
+        100 points is reached.
+        """
+
+        # If a 1 has been rolled then the player is informed
+        # and depending on if it is a solo game or a multiplayer game
+        # the bots turn is initiated or the turn is passed over to
+        # the other player.
+        # Else if the outcome was not a 1 then the game checks for a winner.
+        # If no winner is found the outcome of the roll is printed.
 
         if (not self.game.game_is_running()):
+
             msg = "\tStart a game before you roll.\n"
             print(msg)
             return
@@ -52,6 +86,8 @@ class Shell(cmd.Cmd):
             msg = "\tYou rolled a 1.. bummer!"
             print(msg)
 
+            # This following part is basicly repeated in do_hold,
+            # might be a good idea to make it into a method.
             if (self.game.get_number_of_players() == 1):
                 bot_msg = self.game.begin_bot_turn()
                 print(bot_msg)
@@ -69,6 +105,12 @@ class Shell(cmd.Cmd):
                 print(msg)
 
     def do_hold(self, _):
+        """
+        If a game is running then hold the players points.
+
+        The turn will also be passed over to the bot or the next player.
+        Checks for winner. Ends game if winner is found.
+        """
 
         if (not self.game.game_is_running()):
             msg = "\tStart a game before you hold.\n"
@@ -78,6 +120,7 @@ class Shell(cmd.Cmd):
         hold_msg = self.game.hold()
         print(hold_msg)
 
+        # Repetion from do_roll starts here.
         if (self.game.get_number_of_players() == 1):
             bot_msg = self.game.begin_bot_turn()
             print(bot_msg)
@@ -92,6 +135,11 @@ class Shell(cmd.Cmd):
             print(swap_msg)
 
     def do_continue(self, _):
+        """
+        If there is a game to continue then reset the score and start over.
+
+        You can choose to continue playing and collect wins for the highscore.
+        """
         if (self.game.is_prior_game() and not self.game.game_is_running()):
             self.game.reset_game()
             msg = "\tThe game has been reset! You can now roll again.\n"
@@ -101,10 +149,21 @@ class Shell(cmd.Cmd):
         print(msg)
 
     def do_highscore(self, _):
+        """Show the highscore list."""
         msg = self.game.display_highscore()
         print(msg)
 
+    def do_change_difficulty(self, _):
+        """
+        Change the difficulty of the bot.
+
+        There is two settings EASY or HARD.
+        """
+        msg = self.game.new_difficulty()
+        print(msg)
+
     def do_quit(self, _):
+        """Saves highscores and quits the game."""
         msg = "Thanks for playing!"
         print(msg)
         self.game.call_save_highscore()
