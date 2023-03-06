@@ -1,17 +1,18 @@
 from player import Player
 import pickle
 
+
 class Highscore:
     def __init__(self):
         """
-        Constructor to initialize the entries list and load the highscore from file.
+        Initialize the entries list and load the highscore from file.
         """
         self._entries = []
         self.load_highscore()
 
     def add_entry(self, player: Player):
         """
-        Add player to the highscore list or update their number of wins if already present.
+        Add player to the highscore list or update their number of wins.
         """
         if (player not in self._entries):
             self._entries.append(player)
