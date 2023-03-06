@@ -29,7 +29,7 @@ class Shell(cmd.Cmd):
         # Starts a solo game.
         # The prompt is set to the players name.
 
-        msg = "One argument required: Player1 name"
+        msg = "One argument required: Player1_name"
         if not arg:
             print(msg)
             return
@@ -149,7 +149,7 @@ class Shell(cmd.Cmd):
         print(msg)
 
     def do_highscore(self, _):
-        """Show the highscore list."""
+        """Print the highscore list."""
         msg = self.game.display_highscore()
         print(msg)
 

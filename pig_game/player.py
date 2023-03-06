@@ -1,5 +1,5 @@
 """Contains a player class."""
-from dice import Dice
+from .dice import Dice
 
 
 class Player():

@@ -6,6 +6,7 @@ from pig_game import player
 
 class test_player(unittest.TestCase):
     """METHOD THAT TESTS PLAYER METHODS."""
+
     def test_player__init__(self):
         """INITIATES PLAYER AND CHECK."""
         p1 = player.Player("Fred", "blue")

@@ -29,6 +29,7 @@ class Intelligence:
         return self._name
 
     def set_turn_score(self, score: int):
+        """Set the score for this round for this Intelligence object."""
         self._turn_score = score
 
     def get_turn_score(self):
@@ -36,6 +37,7 @@ class Intelligence:
         return self._turn_score
 
     def set_total_score(self, total_score: int):
+        """Set the total score for this Intelligence object."""
         self._total_score = total_score
 
     def get_total_score(self):
@@ -55,6 +57,7 @@ class Intelligence:
         self._difficulty_setting = difficulty
 
     def get_difficulty(self):
+        """Return the difficulty setting of the Intelligence object."""
         return self._difficulty_setting
 
     def make_play(self, player: Player):
