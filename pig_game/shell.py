@@ -1,6 +1,8 @@
 """Contains Shell class."""
 import cmd
 import game
+from pyfiglet import figlet_format
+from colorama import Fore
 
 
 class Shell(cmd.Cmd):
@@ -9,6 +11,8 @@ class Shell(cmd.Cmd):
 
     Contains methods that responds to user input in the terminal.
     """
+    titel = figlet_format("PIG GAME", font="isometric3")
+    print(Fore.RED + titel)
 
     intro = "Welcome to the game. Type help or ? to list commands.\n"
     prompt = "(game) "

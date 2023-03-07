@@ -6,6 +6,8 @@ flake8-polyfill==1.0.2
 
 # Code style
 black==23.1.0
+colorama==0.4.6
+pyfiglet==0.8.post1
 
 # Unit test and coverage
 coverage==6.3
