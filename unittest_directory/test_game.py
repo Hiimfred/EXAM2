@@ -20,4 +20,4 @@ class TestGame(unittest.TestCase):
 
     def test_new_difficulty(self):
         """Test new_difficulty method."""
-        ...
+        self.bot.set_difficulty(difficulty.Difficulty.HARD)
