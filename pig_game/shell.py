@@ -11,6 +11,7 @@ class Shell(cmd.Cmd):
 
     Contains methods that responds to user input in the terminal.
     """
+
     titel = figlet_format("PIG GAME", font="isometric3")
     print(Fore.RED + titel)
 
@@ -18,7 +19,7 @@ class Shell(cmd.Cmd):
     prompt = "(game) "
 
     def __init__(self):
-        """Initiates the game object."""
+        """Initiate the game object."""
         super().__init__()
         self.game = game.Game()
 
@@ -70,7 +71,6 @@ class Shell(cmd.Cmd):
         Will pass the turn if a 1 is rolled and end the game if
         100 points is reached.
         """
-
         # If a 1 has been rolled then the player is informed
         # and depending on if it is a solo game or a multiplayer game
         # the bots turn is initiated or the turn is passed over to
@@ -115,7 +115,6 @@ class Shell(cmd.Cmd):
         The turn will also be passed over to the bot or the next player.
         Checks for winner. Ends game if winner is found.
         """
-
         if (not self.game.game_is_running()):
             msg = "\tStart a game before you hold.\n"
             print(msg)
@@ -167,7 +166,7 @@ class Shell(cmd.Cmd):
         print(msg)
 
     def do_quit(self, _):
-        """Saves highscores and quits the game."""
+        """Save highscores and quits the game."""
         msg = "Thanks for playing!"
         print(msg)
         self.game.call_save_highscore()

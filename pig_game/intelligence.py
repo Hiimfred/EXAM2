@@ -37,7 +37,7 @@ class Intelligence:
         if (isinstance(score, int)):
             self._turn_score = score
         else:
-            raise TypeError("Must be an integer.")
+            raise TypeError("Turn score must be an integer.")
 
     def get_turn_score(self):
         """Return the current score for this Intelligence object."""
@@ -48,7 +48,7 @@ class Intelligence:
         if (isinstance(total_score, int)):
             self._total_score = total_score
         else:
-            raise TypeError("Must be an integer.")
+            raise TypeError("Total score must be an integer.")
 
     def get_total_score(self):
         """Return the total score for this Intelligence object."""
@@ -56,7 +56,10 @@ class Intelligence:
 
     def set_color(self, color: str):
         """Set a new color for this Intelligence object."""
-        self._color = color
+        if (isinstance(color, str)):
+            self._color = color
+        else:
+            raise TypeError("Color must be a string.")
 
     def get_color(self):
         """Return the color of this Intelligence object."""

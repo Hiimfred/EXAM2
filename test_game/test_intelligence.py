@@ -3,6 +3,7 @@
 import unittest
 from pig_game import intelligence
 from pig_game import difficulty
+from pig_game import player
 
 
 class TestIntelligence(unittest.TestCase):
@@ -53,3 +54,55 @@ class TestIntelligence(unittest.TestCase):
         """Test the get_total_score method."""
         self.bot._total_score = 25
         self.assertEqual(self.bot.get_total_score(), 25)
+
+    def test_set_color(self):
+        """Test the set_color method."""
+        self.bot.set_color("green")
+        self.assertEqual(self.bot._color, "green")
+        self.assertRaises(TypeError, self.bot.set_color, True)
+
+    def test_get_color(self):
+        """Test the get_color method."""
+        self.bot._color = "red"
+        self.assertEqual(self.bot.get_color(), "red")
+
+    def test_set_difficulty(self):
+        """Test the set_difficulty method."""
+        self.bot.set_difficulty(difficulty.Difficulty.HARD)
+        diff = self.bot._difficulty_setting
+        self.assertTrue(diff is difficulty.Difficulty.HARD)
+
+    def test_get_difficulty(self):
+        """Test the get_difficulty method."""
+        self.bot._difficulty_setting = difficulty.Difficulty.EASY
+        self.assertEqual(self.bot.get_difficulty(), difficulty.Difficulty.EASY)
+
+    def test_make_play(self):
+        """Test the make_play method."""
+        test_player = player.Player("Robert", "blue")
+        self.bot._difficulty_setting = difficulty.Difficulty.EASY
+        for i in range(5):
+            outcomes = self.bot.make_play(test_player)
+            length = len(outcomes)
+            self.assertTrue(length >= 1 or length <= 2)
+
+        self.bot._difficulty_setting = difficulty.Difficulty.HARD
+        test_player.set_total_score(81)
+        self.bot.set_total_score(71)
+        for i in range(10):
+            outcomes = self.bot.make_play(test_player)
+            length = len(outcomes)
+            self.assertTrue(length >= 1 or length <= 9)
+
+        test_player.set_total_score(61)
+        for i in range(10):
+            outcomes = self.bot.make_play(test_player)
+            length = len(outcomes)
+            self.assertTrue(length >= 1 or length <= 4)
+
+        self.bot.set_total_score(40)
+        test_player.set_total_score(40)
+        for i in range(10):
+            outcomes = self.bot.make_play(test_player)
+            length = len(outcomes)
+            self.assertTrue(length >= 1 or length <= 3)
