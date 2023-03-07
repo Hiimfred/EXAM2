@@ -11,8 +11,8 @@ class TestGame(unittest.TestCase):
         self.game = game.Game()
 
     def test_game__init__(self):
-    
+        ...
+
     def test_new_difficulty(self):
         """Test new_difficulty method."""
-        ...
-        
+        self.game.start_solo_game("Player")
