@@ -1,5 +1,6 @@
 """Containst TestGame class."""
 import unittest
+from pig_game import game
 from pig_game import player
 from pig_game import intelligence
 from pig_game import dice
@@ -18,6 +19,8 @@ class TestGame(unittest.TestCase):
         self.die = dice.Dice()
         self.highscore = highscore.Highscore()
 
+    def test_game__init__(self):
+    
     def test_new_difficulty(self):
         """Test new_difficulty method."""
         ...
