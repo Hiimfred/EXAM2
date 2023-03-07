@@ -23,7 +23,7 @@ class test_player(unittest.TestCase):
         self.assertEqual(p1.get_score(), 0)
 
     def test_get_name(self):
-        """Check if"""
+        """Check if get name is correct."""
         p1 = player.Player("Fred", "blue")
 
         p1._name = "Pelle"

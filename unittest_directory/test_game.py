@@ -8,6 +8,16 @@ from pig_game import difficulty
 
 
 class TestGame(unittest.TestCase):
-    """Mothods that test the Game class."""
+    """Methods that test the Game class."""
 
-    ...
+    def setUp(self):
+        """Set up objects for testing."""
+        self.curr_player = player.Player("P1", "blue")
+        self.pend_player = player.Player("P2", "red")
+        self.bot = intelligence.Intelligence()
+        self.die = dice.Dice()
+        self.highscore = highscore.Highscore()
+
+    def test_new_difficulty(self):
+        """Test new_difficulty method."""
+        ...
