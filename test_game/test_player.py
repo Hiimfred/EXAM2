@@ -1,4 +1,4 @@
-"""Contains test for player class."""
+"""Unit testing."""
 
 import unittest
 from pig_game import player
@@ -11,8 +11,8 @@ class test_player(unittest.TestCase):
     def test_player__init__(self):
         """
         Initiates player and check name and score.
-        
-        Test module to get name, color and score 
+
+        Test module to get name, color and score
         to give correct value.
         """
         p1 = player.Player("Fred", "blue")
@@ -42,10 +42,10 @@ class test_player(unittest.TestCase):
         p1.set_color("red")
         self.assertEqual(p1.get_color(), "red")
         self.assertRaises(ValueError, p1.set_color, "pink")
-    
+
     def test_roll(self):
-        p1 = player.Player("Fred","blue")
-        
+        p1 = player.Player("Fred", "blue")
+
         for i in range(10):
             p1.set_score(0)
             outcome = p1.roll(dice.Dice())
@@ -53,15 +53,25 @@ class test_player(unittest.TestCase):
             if outcome == 1:
                 self.assertEqual(p1.get_score(), 0)
             else:
-                self.assertEqual(p1.get_score(),outcome)
-    
+                self.assertEqual(p1.get_score(), outcome)
+
     def test_hold(self):
         p1 = player.Player("Fred", "blue")
-        
+
         p1.set_total_score(0)
         p1.set_score(50)
         p1.hold()
         self.assertEqual(p1.get_total_score(), 50)
         self.assertEqual(p1.get_score(), 0)
-        
-        
+
+    def test_add_win(self):
+        p1 = player.Player("Fred", "blue")
+
+        p1.add_win()
+        self.assertEqual(p1.get_nr_of_wins(), 1)
+
+    def test_get_nr_of_wins(self):
+        p1 = player.Player("Fred", "blue")
+
+        p1.set_nr_of_wins(5)
+        self.assertEqual(p1.get_nr_of_wins(), 5)

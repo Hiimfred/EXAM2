@@ -6,7 +6,7 @@ class Player():
     """
     Player class.
 
-    Contains getter and setters for name, score, color and wins.
+    Contains getter and setters for name, score, color Dan wins.
     Also contains methods for player to roll, hold and
     alter highscore numbers.
     """
