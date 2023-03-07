@@ -64,7 +64,3 @@ class TestHighscore(unittest.TestCase):
         player1 = Player("Alice")
         self.hs.add_entry(player1)
         self.assertTrue(self.hs.not_empty())
-
-
-if __name__ == '__main__':
-    unittest.main()

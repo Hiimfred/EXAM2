@@ -12,6 +12,7 @@ class Game:
 
     Contains variables and methods related to the game itself.
     """
+
     _highscore = Highscore()
     _current_player = "Not Set"
     _pending_player = "Not set"
@@ -47,14 +48,14 @@ class Game:
         return self._score_to_win
 
     def start_solo_game(self, name):
-        """Initiates a game with one player."""
+        """Initiate a game with one player."""
         self._game_started = True
         self._current_player = Player(name, "blue")
         self.set_number_of_players(1)
         return
 
     def start_multiplayer_game(self, name1, name2):
-        """Initiates a game with two players."""
+        """Initiate a game with two players."""
         self._game_started = True
         self._current_player = Player(name1, "blue")
         self._pending_player = Player(name2, "red")
