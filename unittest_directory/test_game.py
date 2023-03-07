@@ -1,9 +1,6 @@
 """Containst TestGame class."""
 import unittest
-from pig_game import player
-from pig_game import intelligence
-from pig_game import dice
-from pig_game import highscore
+from pig_game import game
 
 
 class TestGame(unittest.TestCase):
@@ -19,7 +16,7 @@ class TestGame(unittest.TestCase):
 
     def test_new_difficulty(self):
         """Test new_difficulty method."""
-        self.game.start_solo_game("Player")   
+        self.game.start_solo_game("Player") 
 
     def test_set_number_of_players(self):
         self.assertRaises(ValueError, self.game.set_number_of_players, 3)

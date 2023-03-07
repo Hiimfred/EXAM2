@@ -1,6 +1,5 @@
 import unittest
-from pig_game.player import Player
-from pig_game import game
+from pig_game import player
 from pig_game import highscore
 
 
@@ -9,9 +8,9 @@ class TestHighscore(unittest.TestCase):
         self.hs = highscore.Highscore()
 
     def test_add_entry(self):
-        player1 = Player("Alice")
-        player2 = Player("Bob")
-        player3 = Player("Charlie")
+        player1 = player.Player("Alice", "blue")
+        player2 = player.Player("Bob", "blue")
+        player3 = player.Player("Charlie", "blue")
 
         '''Add player1 to empty highscore'''
         self.hs.add_entry(player1)
@@ -32,8 +31,8 @@ class TestHighscore(unittest.TestCase):
         self.assertEqual(self.hs._entries, [player3, player1, player2])
 
     def test_save_load_highscore(self):
-        player1 = Player("Alice")
-        player2 = Player("Bob")
+        player1 = player.Player("Alice", "blue")
+        player2 = player.Player("Bob", "blue")
 
         self.hs.add_entry(player1)
         self.hs.add_entry(player2)
@@ -45,8 +44,8 @@ class TestHighscore(unittest.TestCase):
         self.assertEqual(self.hs._entries, [player1, player2])
 
     def test_get_highscore(self):
-        player1 = Player("Alice")
-        player2 = Player("Bob")
+        player1 = player.Player("Alice", "blue")
+        player2 = player.Player("Bob", "blue")
 
         self.hs.add_entry(player1)
         self.hs.add_entry(player2)
@@ -62,10 +61,6 @@ class TestHighscore(unittest.TestCase):
         self.assertFalse(self.hs.not_empty())
 
         '''Non-empty highscore'''
-        player1 = Player("Alice")
+        player1 = player.Player("Alice", "blue")
         self.hs.add_entry(player1)
         self.assertTrue(self.hs.not_empty())
-
-    def test_init(self):
-        g = game()
-        self.assertEqual(g._highscore.get_highscore(), [])
