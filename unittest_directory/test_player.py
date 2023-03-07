@@ -22,12 +22,19 @@ class test_player(unittest.TestCase):
         self.assertEqual(p1.get_total_score(), 0)
         self.assertEqual(p1.get_score(), 0)
 
+    def test_get_name(self):
+        """Check if"""
+        p1 = player.Player("Fred", "blue")
+
+        p1._name = "Pelle"
+        self.assertEqual(p1.get_name(), "Pelle")
+
     def test_set_name(self):
         """Check if set name is correct."""
         p1 = player.Player("Fred", "blue")
 
         p1.set_name("123@")
-        self.assertEqual(p1.get_name(), "123@")
+        self.assertEqual(p1._name, "123@")
 
     def test_get_color(self):
         """Check if player get correct set color."""
@@ -44,6 +51,7 @@ class test_player(unittest.TestCase):
         self.assertRaises(ValueError, p1.set_color, "pink")
 
     def test_roll(self):
+        """..."""
         p1 = player.Player("Fred", "blue")
 
         for i in range(10):
@@ -56,6 +64,7 @@ class test_player(unittest.TestCase):
                 self.assertEqual(p1.get_score(), outcome)
 
     def test_hold(self):
+        """..."""
         p1 = player.Player("Fred", "blue")
 
         p1.set_total_score(0)
@@ -65,13 +74,19 @@ class test_player(unittest.TestCase):
         self.assertEqual(p1.get_score(), 0)
 
     def test_add_win(self):
+        """..."""
         p1 = player.Player("Fred", "blue")
 
         p1.add_win()
         self.assertEqual(p1.get_nr_of_wins(), 1)
+        p1.add_win()
+        self.assertEqual(p1.get_nr_of_wins(), 2)
 
     def test_get_nr_of_wins(self):
+        """..."""
         p1 = player.Player("Fred", "blue")
 
         p1.set_nr_of_wins(5)
         self.assertEqual(p1.get_nr_of_wins(), 5)
+        p1.set_nr_of_wins(10)
+        self.assertEqual(p1.get_nr_of_wins(), 10)
