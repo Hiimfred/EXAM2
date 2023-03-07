@@ -26,3 +26,4 @@ class TestGame(unittest.TestCase):
         self.assertEqual(self.game.get_number_of_players(), 1)
         self.game.set_number_of_players(2)
         self.assertEqual(self.game.get_number_of_players(), 2)
+        ...
