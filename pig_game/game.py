@@ -1,9 +1,9 @@
 """Contains Game class."""
-from player import Player
-from intelligence import Intelligence
-from dice import Dice
-from highscore import Highscore
-from difficulty import Difficulty
+from .player import Player
+from .intelligence import Intelligence
+from .dice import Dice
+from .highscore import Highscore
+from .difficulty import Difficulty
 
 
 class Game:

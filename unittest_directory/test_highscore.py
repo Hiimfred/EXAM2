@@ -1,11 +1,12 @@
 import unittest
 from pig_game.player import Player
-from pig_game.highscore import Highscore
+from pig_game import game
+from pig_game import highscore
 
 
 class TestHighscore(unittest.TestCase):
     def setUp(self):
-        self.hs = Highscore()
+        self.hs = highscore.Highscore()
 
     def test_add_entry(self):
         player1 = Player("Alice")
@@ -64,3 +65,7 @@ class TestHighscore(unittest.TestCase):
         player1 = Player("Alice")
         self.hs.add_entry(player1)
         self.assertTrue(self.hs.not_empty())
+
+    def test_init(self):
+        g = game()
+        self.assertEqual(g._highscore.get_highscore(), [])
