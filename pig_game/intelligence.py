@@ -1,7 +1,7 @@
 """Contains Intelligence class."""
-from dice import Dice
-from difficulty import Difficulty
-from player import Player
+from .dice import Dice
+from .difficulty import Difficulty
+from .player import Player
 
 
 class Intelligence:
@@ -10,6 +10,7 @@ class Intelligence:
 
     Contains variables and methods regarding the NPC and its behaviour.
     """
+
     _die = Dice()
     _total_score = 0
     _turn_score = 0
@@ -22,7 +23,10 @@ class Intelligence:
 
     def set_name(self, name: str):
         """Set a new name for this Intelligence object."""
-        self._name = name
+        if (isinstance(name, str)):
+            self._name = name
+        else:
+            raise TypeError("Name must be a string.")
 
     def get_name(self):
         """Return the name of this Intelligence object."""
@@ -30,7 +34,10 @@ class Intelligence:
 
     def set_turn_score(self, score: int):
         """Set the score for this round for this Intelligence object."""
-        self._turn_score = score
+        if (isinstance(score, int)):
+            self._turn_score = score
+        else:
+            raise TypeError("Must be an integer.")
 
     def get_turn_score(self):
         """Return the current score for this Intelligence object."""
@@ -38,7 +45,10 @@ class Intelligence:
 
     def set_total_score(self, total_score: int):
         """Set the total score for this Intelligence object."""
-        self._total_score = total_score
+        if (isinstance(total_score, int)):
+            self._total_score = total_score
+        else:
+            raise TypeError("Must be an integer.")
 
     def get_total_score(self):
         """Return the total score for this Intelligence object."""

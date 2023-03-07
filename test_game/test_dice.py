@@ -1,4 +1,4 @@
-"""Contains tests for dice class."""
+"""Contains TestDice class."""
 
 import unittest
 from pig_game import dice
@@ -36,7 +36,7 @@ class TestDice(unittest.TestCase):
             out = die.roll_dice()
             self.assertTrue(out >= 1 and out <= nr_sides)
 
-    def test_get_side_value(self):
+    def test_get_side_up(self):
         """Check if the value returned is the expected value."""
         die = dice.Dice()
 
