@@ -1,6 +1,7 @@
 import unittest
 import game
 import player
+import difficulty
 
 
 class TestGame(unittest.TestCase):
@@ -55,6 +56,30 @@ class TestGame(unittest.TestCase):
         self.assertEqual(self.game._current_player.get_color(), "blue")
         self.assertEqual(self.game._pending_player.get_color(), "red")
 
+    def test_is_prior_game(self):
+        """Test is_prior_game method."""
+        self.assertFalse(self.game.is_prior_game())
+        self.game._prior_game = True
+        self.assertTrue(self.game.is_prior_game())
+
+    def test_reset_game(self):
+        """Test reset_game method."""
+        self.game._current_player = player.Player("Test", "red")
+        self.game._pending_player = player.Player("Test2", "blue")
+        self.game._current_player.set_total_score(100)
+        self.game._pending_player.set_total_score(100)
+        self.game._bot.set_total_score(100)
+        self.game._game_started = False
+
+        self.game.set_number_of_players(1)
+        self.game.reset_game()
+        self.game.set_number_of_players(2)
+        self.game.reset_game()
+        self.assertEqual(self.game._current_player.get_total_score(), 0)
+        self.assertEqual(self.game._pending_player.get_total_score(), 0)
+        self.assertEqual(self.game._bot.get_total_score(), 0)
+        self.assertTrue(self.game._game_started)
+
     def test_game_is_running(self):
         """Test that game run and ends correctly."""
         self.assertFalse(self.game.game_is_running())
@@ -75,3 +100,18 @@ class TestGame(unittest.TestCase):
         new_score = self.game._current_player.get_total_score()
         self.assertEqual(new_score, 99)
         self.assertNotEqual(start_score, new_score)
+
+    def test_display_highscore(self):
+        """Test display_highscore method."""
+        self.game._highscore._entries = []
+        msg = self.game.display_highscore()
+        self.assertEqual(msg, "\tThere are no highscores.\n")
+
+    def test_new_difficulty(self):
+        """Test new_difficulty method."""
+        diff = self.game._bot.get_difficulty()
+        self.assertEqual(diff, difficulty.Difficulty.EASY)
+        msg = self.game.new_difficulty()
+        self.assertEqual(msg, "\tBot difficulty set to HARD.\n")
+        diff = self.game._bot.get_difficulty()
+        self.assertEqual(diff, difficulty.Difficulty.HARD)
