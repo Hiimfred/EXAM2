@@ -128,11 +128,12 @@ class Shell(cmd.Cmd):
             bot_msg = self.game.begin_bot_turn()
             print(bot_msg)
 
-            if (self.game.is_winner()):
-                winner = self.game.get_winner()
-                print(f"\t{winner.get_name()} won the game!!\n")
-                self.game.end_game()
-        else:
+        if (self.game.is_winner()):
+            winner = self.game.get_winner()
+            print(f"\t{winner.get_name()} won the game!!\n")
+            self.game.end_game()
+
+        if (self.game.get_number_of_players() == 2):
             swap_msg = self.game.pass_turn()
             self.prompt = f"({self.game.get_current_player_name()}) "
             print(swap_msg)
@@ -171,3 +172,13 @@ class Shell(cmd.Cmd):
         print(msg)
         self.game.call_save_highscore()
         return True
+
+    def do_cheat(self, _):
+        """Set score to 99."""
+        if (not self.game.game_is_running()):
+            msg = "\tStart a game before you cheat.\n"
+            print(msg)
+            return
+        msg = "You cheater.. your score is set to 99.."
+        print(msg)
+        self.game.activate_cheat()

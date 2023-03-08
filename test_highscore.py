@@ -1,6 +1,6 @@
 import unittest
-from pig_game import player
-from pig_game import highscore
+import player
+import highscore
 
 
 class TestHighscore(unittest.TestCase):

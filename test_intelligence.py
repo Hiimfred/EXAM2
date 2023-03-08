@@ -1,9 +1,9 @@
 """Contains TestIntelligence class."""
 
 import unittest
-from pig_game import intelligence
-from pig_game import difficulty
-from pig_game import player
+import intelligence
+import difficulty
+import player
 
 
 class TestIntelligence(unittest.TestCase):

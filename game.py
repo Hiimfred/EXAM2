@@ -1,9 +1,9 @@
 """Contains Game class."""
-from .player import Player
-from .intelligence import Intelligence
-from .dice import Dice
-from .highscore import Highscore
-from .difficulty import Difficulty
+from player import Player
+from intelligence import Intelligence
+from dice import Dice
+from highscore import Highscore
+from difficulty import Difficulty
 
 
 class Game:
@@ -27,6 +27,7 @@ class Game:
         self._score_to_win = 100
         self._text_color = "magenta"
         self._die = Dice()
+        self._highscore.load_highscore()
 
     def set_number_of_players(self, number_of_players: int):
         """Change the number of players in the game."""
@@ -176,3 +177,7 @@ class Game:
             msg = "\tBot difficulty set to EASY.\n"
 
         return msg
+
+    def activate_cheat(self):
+        """Set the current players score to 99."""
+        self._current_player.cheat()

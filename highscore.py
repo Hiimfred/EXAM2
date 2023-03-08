@@ -1,5 +1,5 @@
 """Contains Highscore class."""
-from .player import Player
+from player import Player
 import pickle
 
 
@@ -11,9 +11,8 @@ class Highscore:
     """
 
     def __init__(self):
-        """Initialize the entries list and load the highscore from file."""
+        """Initialize the entries list."""
         self._entries = []
-        self.load_highscore()
 
     def add_entry(self, player: Player):
         """Add player to the highscore list or update their number of wins."""
@@ -25,13 +24,13 @@ class Highscore:
 
     def save_highscore(self):
         """Save the highscore list to a file using pickle."""
-        with open("pig_game/highscore.bin", "wb") as file:
+        with open("highscore.bin", "wb") as file:
             pickle.dump(self._entries, file)
 
     def load_highscore(self):
         """Load the highscore list from a file using pickle."""
         try:
-            with open("pig_game/highscore.bin", "rb") as file:
+            with open("highscore.bin", "rb") as file:
                 self._entries = pickle.load(file)
         except EOFError:
             ...

@@ -1,7 +1,7 @@
 """Contains TestDice class."""
 
 import unittest
-from pig_game import dice
+import dice
 
 
 class TestDice(unittest.TestCase):

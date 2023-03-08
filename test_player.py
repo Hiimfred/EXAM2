@@ -1,8 +1,8 @@
 """Unit testing."""
 
 import unittest
-from pig_game import player
-from pig_game import dice
+import player
+import dice
 
 
 class test_player(unittest.TestCase):

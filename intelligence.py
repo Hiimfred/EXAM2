@@ -1,7 +1,7 @@
 """Contains Intelligence class."""
-from .dice import Dice
-from .difficulty import Difficulty
-from .player import Player
+from dice import Dice
+from difficulty import Difficulty
+from player import Player
 
 
 class Intelligence:

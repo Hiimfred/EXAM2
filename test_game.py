@@ -1,5 +1,5 @@
 import unittest
-from pig_game import game
+import game
 
 
 class TestGame(unittest.TestCase):

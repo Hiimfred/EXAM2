@@ -1,5 +1,5 @@
 """Contains a player class."""
-from .dice import Dice
+from dice import Dice
 
 
 class Player():
@@ -60,7 +60,7 @@ class Player():
                              "red, blue, green, magenta, yellow, cyan")
 
     def add_win(self):
-        """Adds one win for player."""
+        """Add one win for player."""
         self._wins += 1
 
     def get_nr_of_wins(self):
@@ -98,3 +98,7 @@ class Player():
     def __str__(self):
         """Return a formated string with name and number of wins."""
         return f"{self.get_name():^10} ---- {self.get_nr_of_wins():^10}"
+
+    def cheat(self):
+        """Cheat and set total score to 99."""
+        self.set_total_score(99)
