@@ -1,5 +1,8 @@
 import unittest
 import game
+import dice
+import player
+import highscore
 
 
 class TestGame(unittest.TestCase):
@@ -10,7 +13,8 @@ class TestGame(unittest.TestCase):
         self.game = game.Game()
 
     def test_game__init__(self):
-        ...
+        """..."""
+        self.assertEqual(self.game._score_to_win, 100)
 
     def test_new_difficulty(self):
         """Test new_difficulty method."""

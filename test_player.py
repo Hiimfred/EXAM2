@@ -51,7 +51,14 @@ class test_player(unittest.TestCase):
         self.assertRaises(ValueError, p1.set_color, "pink")
 
     def test_roll(self):
-        """..."""
+        """
+        Check if roll function works.
+        
+        Roll dice 10 times and checks outcome is is correct 
+        range (1-6) and that 1 adds no point and turn goes
+        over to next player else cotinue to roll and add points
+        each roll until 1 or hold.
+        """
         p1 = player.Player("Fred", "blue")
 
         for i in range(10):
@@ -64,7 +71,10 @@ class test_player(unittest.TestCase):
                 self.assertEqual(p1.get_score(), outcome)
 
     def test_hold(self):
-        """..."""
+        """
+        Check if hold works and adds score
+        to total score.
+        """
         p1 = player.Player("Fred", "blue")
 
         p1.set_total_score(0)
@@ -74,7 +84,7 @@ class test_player(unittest.TestCase):
         self.assertEqual(p1.get_score(), 0)
 
     def test_add_win(self):
-        """..."""
+        """Check that wins add wins work properly."""
         p1 = player.Player("Fred", "blue")
 
         p1.add_win()
@@ -83,10 +93,17 @@ class test_player(unittest.TestCase):
         self.assertEqual(p1.get_nr_of_wins(), 2)
 
     def test_get_nr_of_wins(self):
-        """..."""
+        """Check number of wins for player."""
         p1 = player.Player("Fred", "blue")
 
         p1.set_nr_of_wins(5)
         self.assertEqual(p1.get_nr_of_wins(), 5)
         p1.set_nr_of_wins(10)
         self.assertEqual(p1.get_nr_of_wins(), 10)
+
+    def test_cheat(self):
+        """Check if cheat works and give 99 points."""
+        p1 = player.Player("Fred", "blue")
+        
+        p1.cheat()
+        self.assertEqual(p1.get_total_score(), 99)
