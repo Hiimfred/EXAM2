@@ -19,10 +19,6 @@ class TestGame(unittest.TestCase):
         self.assertIsNotNone(self.game._die)
         self.assertIsNotNone(self.game._highscore)
 
-    def test_new_difficulty(self):
-        """Test new_difficulty method."""
-        self.game.start_solo_game("Player")
-
     def test_set_number_of_players(self):
         """
         Test that it works with 1-2 player and it can't
@@ -45,12 +41,19 @@ class TestGame(unittest.TestCase):
         self.assertEqual(self.game.get_score_to_win(), 50)
 
     def test_multiplayer_game(self):
-        """..."""
-        ...
+        """Test to start a multiplayer game."""
+        name1 = "p1"
+        name2 = "p2"
 
-    def test_roll(self):
-        """..."""
-        ...
+        self.game.start_multiplayer_game(name1, name2)
+        self.assertTrue(self.game.game_is_running())
+        self.assertEqual(self.game._number_of_players, 2)
+        self.assertIsNotNone(self.game._current_player)
+        self.assertIsNotNone(self.game._pending_player)
+        self.assertEqual(self.game._current_player.get_name(), name1)
+        self.assertEqual(self.game._pending_player.get_name(), name2)
+        self.assertEqual(self.game._current_player.get_color(), "blue")
+        self.assertEqual(self.game._pending_player.get_color(), "red")
 
     def test_game_is_running(self):
         """Test that game run and ends correctly."""
@@ -61,7 +64,10 @@ class TestGame(unittest.TestCase):
         self.assertFalse(self.game.game_is_running())
 
     def test_activate_cheat(self):
-        """.."""
+        """
+        Test activate cheat to see it adds 99 point
+        to current player.
+        """
         self.game.start_solo_game(self.p1)
 
         start_score = self.game._current_player.get_total_score()
