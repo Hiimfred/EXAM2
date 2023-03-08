@@ -14,7 +14,7 @@ class TestGame(unittest.TestCase):
 
     def test_new_difficulty(self):
         """Test new_difficulty method."""
-        self.game.start_solo_game("Player") 
+        self.game.start_solo_game("Player")
 
     def test_set_number_of_players(self):
         self.assertRaises(ValueError, self.game.set_number_of_players, 3)
