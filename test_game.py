@@ -1,8 +1,6 @@
 import unittest
 import game
-import dice
 import player
-import highscore
 
 
 class TestGame(unittest.TestCase):
@@ -10,17 +8,26 @@ class TestGame(unittest.TestCase):
 
     def setUp(self):
         """Set up objects for testing."""
+        self.p1 = player.Player("bob", "blue")
         self.game = game.Game()
 
     def test_game__init__(self):
-        """..."""
+        """Test initiation of game."""
         self.assertEqual(self.game._score_to_win, 100)
+        self.assertEqual(self.game._number_of_players, "Not set")
+        self.assertEqual(self.game._text_color, "magenta")
+        self.assertIsNotNone(self.game._die)
+        self.assertIsNotNone(self.game._highscore)
 
     def test_new_difficulty(self):
         """Test new_difficulty method."""
         self.game.start_solo_game("Player")
 
     def test_set_number_of_players(self):
+        """
+        Test that it works with 1-2 player and it can't
+        be played with less or more.
+        """
         self.assertRaises(ValueError, self.game.set_number_of_players, 3)
         self.assertRaises(ValueError, self.game.set_number_of_players, 0)
         self.assertRaises(ValueError, self.game.set_number_of_players, -1)
@@ -28,4 +35,37 @@ class TestGame(unittest.TestCase):
         self.assertEqual(self.game.get_number_of_players(), 1)
         self.game.set_number_of_players(2)
         self.assertEqual(self.game.get_number_of_players(), 2)
+
+    def test_set_score_to_win(self):
+        """Test if set score to win works properly."""
+        self.game.set_score_to_win(100)
+        self.assertEqual(self.game.get_score_to_win(), 100)
+
+        self.game.set_score_to_win(50)
+        self.assertEqual(self.game.get_score_to_win(), 50)
+
+    def test_multiplayer_game(self):
+        """..."""
         ...
+
+    def test_roll(self):
+        """..."""
+        ...
+
+    def test_game_is_running(self):
+        """Test that game run and ends correctly."""
+        self.assertFalse(self.game.game_is_running())
+        self.game.start_solo_game(self.p1)
+        self.assertTrue(self.game.game_is_running())
+        self.game.end_game()
+        self.assertFalse(self.game.game_is_running())
+
+    def test_activate_cheat(self):
+        """.."""
+        self.game.start_solo_game(self.p1)
+
+        start_score = self.game._current_player.get_total_score()
+        self.game.activate_cheat()
+        new_score = self.game._current_player.get_total_score()
+        self.assertEqual(new_score, 99)
+        self.assertNotEqual(start_score, new_score)

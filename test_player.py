@@ -53,7 +53,7 @@ class test_player(unittest.TestCase):
     def test_roll(self):
         """
         Check if roll function works.
-        
+
         Roll dice 10 times and checks outcome is is correct 
         range (1-6) and that 1 adds no point and turn goes
         over to next player else cotinue to roll and add points
@@ -104,6 +104,6 @@ class test_player(unittest.TestCase):
     def test_cheat(self):
         """Check if cheat works and give 99 points."""
         p1 = player.Player("Fred", "blue")
-        
+
         p1.cheat()
         self.assertEqual(p1.get_total_score(), 99)
