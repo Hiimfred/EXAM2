@@ -44,7 +44,7 @@ python pig_game/main.py
 ```
 
 ## Game commands!
-#### type help if you want to display available commands
+#### Type <help> if you want to display available commands:
 Starts a single player game with command:
 ```
 # Enter one player name after typing solo
