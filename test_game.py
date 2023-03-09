@@ -1,3 +1,4 @@
+"""Contains TestGame class."""
 import unittest
 import game
 import player
@@ -21,10 +22,7 @@ class TestGame(unittest.TestCase):
         self.assertIsNotNone(self.game._highscore)
 
     def test_set_number_of_players(self):
-        """
-        Test that it works with 1-2 player and it can't
-        be played with less or more.
-        """
+        """Test that set_number_of_players works with 1 or 2 players."""
         self.assertRaises(ValueError, self.game.set_number_of_players, 3)
         self.assertRaises(ValueError, self.game.set_number_of_players, 0)
         self.assertRaises(ValueError, self.game.set_number_of_players, -1)
@@ -56,6 +54,30 @@ class TestGame(unittest.TestCase):
         self.assertEqual(self.game._current_player.get_color(), "blue")
         self.assertEqual(self.game._pending_player.get_color(), "red")
 
+    def test_is_winner(self):
+        """Test the is_winner method."""
+        self.game._current_player = player.Player("Test_name", "red")
+        self.game.set_number_of_players(1)
+
+        self.assertFalse(self.game.is_winner())
+        self.game._bot.set_total_score(100)
+        self.assertTrue(self.game.is_winner())
+
+    def test_get_current_player_name(self):
+        """Test the get_current_player_name method."""
+        self.game._current_player = player.Player("Test_name", "cyan")
+        self.assertEqual(self.game.get_current_player_name(), "Test_name")
+
+    def test_end_game(self):
+        """Test the end_game method."""
+        self.game._game_started = True
+        self.game._prior_game = False
+
+        self.game.end_game()
+
+        self.assertFalse(self.game._game_started)
+        self.assertTrue(self.game._prior_game)
+
     def test_is_prior_game(self):
         """Test is_prior_game method."""
         self.assertFalse(self.game.is_prior_game())
@@ -64,8 +86,8 @@ class TestGame(unittest.TestCase):
 
     def test_reset_game(self):
         """Test reset_game method."""
-        self.game._current_player = player.Player("Test", "red")
-        self.game._pending_player = player.Player("Test2", "blue")
+        self.game._current_player = player.Player("Test_name", "red")
+        self.game._pending_player = player.Player("Test_name2", "blue")
         self.game._current_player.set_total_score(100)
         self.game._pending_player.set_total_score(100)
         self.game._bot.set_total_score(100)
@@ -89,10 +111,7 @@ class TestGame(unittest.TestCase):
         self.assertFalse(self.game.game_is_running())
 
     def test_activate_cheat(self):
-        """
-        Test activate cheat to see it adds 99 point
-        to current player.
-        """
+        """Test activate_cheat to see that it adds 99 point."""
         self.game.start_solo_game(self.p1)
 
         start_score = self.game._current_player.get_total_score()

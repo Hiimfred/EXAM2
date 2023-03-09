@@ -104,7 +104,7 @@ class Game:
 
     def is_winner(self):
         """Check if someone has reached the score limit and return result."""
-        _is_winner = False
+        _is_winner = "Not set"
         max_score = self.get_score_to_win()
         player_score = self._current_player.get_total_score()
         player_score += self._current_player.get_score()
@@ -117,6 +117,8 @@ class Game:
         elif (self._bot.get_total_score() >= max_score):
             _is_winner = True
             self._winner = self._bot
+        else:
+            _is_winner = False
 
         return _is_winner
 
