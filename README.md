@@ -46,30 +46,32 @@ You can run the unittests without coverage using:
 ```
 make unittest
 ```
-Or you can run the unittests with coverage using: 
+Run the unittests with coverage using: 
 ```
 make coverage
 ```
-And you can run both linters and unittests with: 
+Run both linters and unittests with coverage using:
 ```
 make test
 ```
 
-#Producing Documentation and UML Diagrams
+## Producing Documentation and UML Diagrams
+
+To install graphviz on Windows, use the choco install graphviz command in PowerShell:
+```
+choco install graphviz
+```
+To install on macOS, use the command:
+```
+brew install graphviz
+``` 
+
 If you install graphviz, you should be able to use the following commands to produce documentation and UML diagrams:
 ```
 # to produce documentation for the project
 make pdoc 
 ```
 ```
-make pyreverse to produce UML diagrams.
+# to produce UML diagrams
+make pyreverse
 ```
-
-To install graphviz on Windows, use the choco install graphviz command in PowerShell.
-```
-choco install graphviz
-```
-To install on macOS, use the command.
-```
-brew install graphviz
-``` 
