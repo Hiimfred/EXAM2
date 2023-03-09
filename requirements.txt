@@ -1,13 +1,24 @@
 # Code analysis
+bandit
+
+#cohesion
 flake8==6.0.0
-pylint==2.16.2
 flake8-docstrings==1.7.0
 flake8-polyfill==1.0.2
+
+#metrics.pylint
+pylint==2.16.2
+radon
 
 # Code style
 black==23.1.0
 colorama==0.4.6
 pyfiglet==0.8.post1
+
+# Documentation
+pdoc3
+sphinx
+sphinx-rtd-theme # for ReadTheDocs local build
 
 # Unit test and coverage
 coverage==6.3
