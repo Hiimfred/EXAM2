@@ -24,13 +24,13 @@ class Highscore:
 
     def save_highscore(self):
         """Save the highscore list to a file using pickle."""
-        with open("highscore.bin", "wb") as file:
+        with open("pig_game/highscore.bin", "wb") as file:
             pickle.dump(self._entries, file)
 
     def load_highscore(self):
         """Load the highscore list from a file using pickle."""
         try:
-            with open("highscore.bin", "rb") as file:
+            with open("pig_game/highscore.bin", "rb") as file:
                 self._entries = pickle.load(file)
         except EOFError:
             ...
