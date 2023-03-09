@@ -34,7 +34,7 @@ class Shell(cmd.Cmd):
         # Starts a solo game.
         # The prompt is set to the players name.
 
-        msg = "One argument required: Player1_name"
+        msg = "\tOne argument required: Player1_name\n"
         if not arg:
             print(msg)
             return
@@ -58,7 +58,7 @@ class Shell(cmd.Cmd):
         nr_args = len(args)
 
         if (nr_args != 2):
-            msg = "Two arguments required: Player1_name Player2_name"
+            msg = "\tTwo arguments required: Player1_name Player2_name\n"
             print(msg)
             return
         else:
@@ -181,6 +181,29 @@ class Shell(cmd.Cmd):
         msg = "You cheater.. your score is set to 99.."
         print(msg)
         self.game.activate_cheat()
+
+    def do_color(self, arg):
+        """
+        Change player color to one of the following.
+
+        Red, Blue, Green, Magenta, Yellow, Cyan.
+        """
+        if (not self.game.game_is_running()):
+            msg = "\tStart a game before you change color.\n"
+            print(msg)
+            return
+        elif not arg:
+            msg = "\tOne argument required: Color\n"
+            print(msg)
+            return
+        else:
+            try:
+                self.game.change_color(arg)
+                name = self.game.get_current_player_name()
+                name_in_color = self.game.current_players_color() + name
+                self.prompt = f"({name_in_color + Fore.RED}) "
+            except ValueError as ve:
+                print(ve)
 
     def check_for_winner(self):
         """

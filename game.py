@@ -186,3 +186,7 @@ class Game:
     def current_players_color(self):
         """Return the current players color."""
         return self._current_player.get_color()
+
+    def change_color(self, color: str):
+        """Change the color of the current player."""
+        self._current_player.set_color(color)
