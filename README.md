@@ -1,2 +1,2 @@
 # EXAM2
-Fredrik och Lucas
+Fredrik, Lucas och Carl
