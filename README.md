@@ -20,9 +20,6 @@ make venv
 # if you use Linux/mac:
 . .venv/bin/activate
 ```
-Activate the environment on Linux/Mac: 
-```
-```
 6. Use the following command to download all necessary plugins: 
 ```
 make install
