@@ -16,10 +16,12 @@ make venv
 5. Activate the environment on Windows: 
 ```
 . .venv/Scripts/activate
+
+# if you use Linux/mac:
+. .venv/bin/activate
 ```
 Activate the environment on Linux/Mac: 
 ```
-. .venv/bin/activate
 ```
 6. Use the following command to download all necessary plugins: 
 ```
