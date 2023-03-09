@@ -55,7 +55,7 @@ class test_player(unittest.TestCase):
         """
         Check if roll function works.
 
-        Roll dice 10 times and checks outcome is is correct 
+        Roll dice 10 times and checks outcome is is correct
         range (1-6) and that 1 adds no point and turn goes
         over to next player else cotinue to roll and add points
         each roll until 1 or hold.
@@ -72,10 +72,7 @@ class test_player(unittest.TestCase):
                 self.assertEqual(p1.get_score(), outcome)
 
     def test_hold(self):
-        """
-        Check if hold works and adds score
-        to total score.
-        """
+        """Check if hold works and adds scoreto total score."""
         p1 = player.Player("Fred", "blue")
 
         p1.set_total_score(0)
