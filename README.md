@@ -26,11 +26,12 @@ git clone https://github.com/Hiimfred/EXAM2.git
 ```
 make venv
 ```
-5. Activate the environment on Windows: 
+5. Activate the environment: 
 ```
+# On windows
 . .venv/Scripts/activate
 
-# if you use Linux/mac:
+# On Linux/mac:
 . .venv/bin/activate
 ```
 6. Use the following command to download all necessary plugins: 
