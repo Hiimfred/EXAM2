@@ -1,5 +1,6 @@
 """Contains a player class."""
 from dice import Dice
+from colorama import Fore
 
 
 class Player():
@@ -14,8 +15,7 @@ class Player():
     color_list = ["red", "blue", "green", "magenta", "yellow", "cyan"]
 
     def __init__(self, name: str, color: str):
-        """Default player blueprint."""
-
+        """Initiate default player object."""
         self._total_score = 0
         self._current_score = 0
         self._name = name
@@ -48,7 +48,22 @@ class Player():
 
     def get_color(self):
         """Get the player color."""
-        return self._color
+        fore_color = "Not set"
+
+        if (self._color == "red"):
+            fore_color = Fore.RED
+        elif (self._color == "blue"):
+            fore_color = Fore.BLUE
+        elif (self._color == "green"):
+            fore_color = Fore.GREEN
+        elif (self._color == "magenta"):
+            fore_color = Fore.MAGENTA
+        elif (self._color == "yellow"):
+            fore_color = Fore.YELLOW
+        elif (self._color == "cyan"):
+            fore_color = Fore.CYAN
+
+        return fore_color
 
     def set_color(self, new_color):
         """Set the player chosen color."""

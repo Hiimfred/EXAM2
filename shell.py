@@ -40,7 +40,8 @@ class Shell(cmd.Cmd):
             return
         else:
             self.game.start_solo_game(arg)
-            self.prompt = f"({arg}) "
+            name_in_color = self.game.current_players_color() + arg
+            self.prompt = f"({name_in_color + Fore.RED}) "
 
     def do_multiplayer(self, arg: str):
         """
@@ -62,7 +63,8 @@ class Shell(cmd.Cmd):
             return
         else:
             self.game.start_multiplayer_game(args[0], args[1])
-            self.prompt = f"({args[0]})"
+            name_in_color = self.game.current_players_color() + args[0]
+            self.prompt = f"({name_in_color + Fore.RED}) "
 
     def do_roll(self, _):
         """
@@ -95,18 +97,16 @@ class Shell(cmd.Cmd):
             if (self.game.get_number_of_players() == 1):
                 bot_msg = self.game.begin_bot_turn()
                 print(bot_msg)
+                self.check_for_winner()
             elif (self.game.get_number_of_players() == 2):
                 swap_msg = self.game.pass_turn()
-                self.prompt = f"({self.game.get_current_player_name()}) "
+                name = self.game.get_current_player_name()
+                name_in_color = self.game.current_players_color() + name
+                self.prompt = f"({name_in_color + Fore.RED}) "
                 print(swap_msg)
         else:
-
-            if (self.game.is_winner()):
-                winner = self.game.get_winner()
-                print(f"\t{winner.get_name()} won the game!!")
-                self.game.end_game()
-            else:
-                print(msg)
+            print(msg)
+            self.check_for_winner()
 
     def do_hold(self, _):
         """
@@ -122,21 +122,20 @@ class Shell(cmd.Cmd):
 
         hold_msg = self.game.hold()
         print(hold_msg)
+        self.check_for_winner()
 
-        # Repetion from do_roll starts here.
-        if (self.game.get_number_of_players() == 1):
-            bot_msg = self.game.begin_bot_turn()
-            print(bot_msg)
+        if (not self.game.is_winner()):
 
-        if (self.game.is_winner()):
-            winner = self.game.get_winner()
-            print(f"\t{winner.get_name()} won the game!!\n")
-            self.game.end_game()
-
-        if (self.game.get_number_of_players() == 2):
-            swap_msg = self.game.pass_turn()
-            self.prompt = f"({self.game.get_current_player_name()}) "
-            print(swap_msg)
+            if (self.game.get_number_of_players() == 1):
+                bot_msg = self.game.begin_bot_turn()
+                print(bot_msg)
+                self.check_for_winner()
+            elif (self.game.get_number_of_players() == 2):
+                swap_msg = self.game.pass_turn()
+                name = self.game.get_current_player_name()
+                name_in_color = self.game.current_players_color() + name
+                self.prompt = f"({name_in_color + Fore.RED}) "
+                print(swap_msg)
 
     def do_continue(self, _):
         """
@@ -182,3 +181,14 @@ class Shell(cmd.Cmd):
         msg = "You cheater.. your score is set to 99.."
         print(msg)
         self.game.activate_cheat()
+
+    def check_for_winner(self):
+        """
+        Check if there is a winner to the game.
+
+        If there is a winner then display it.
+        """
+        if (self.game.is_winner()):
+            winner = self.game.get_winner()
+            print(f"\t{winner.get_name()} won the game!!\n")
+            self.game.end_game()

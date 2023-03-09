@@ -25,7 +25,6 @@ class Game:
         """Initiate a game with default settings."""
         self._number_of_players = "Not set"
         self._score_to_win = 100
-        self._text_color = "magenta"
         self._die = Dice()
         self._highscore.load_highscore()
 
@@ -59,7 +58,7 @@ class Game:
         """Initiate a game with two players."""
         self._game_started = True
         self._current_player = Player(name1, "blue")
-        self._pending_player = Player(name2, "red")
+        self._pending_player = Player(name2, "green")
         self.set_number_of_players(2)
         return
 
@@ -183,3 +182,7 @@ class Game:
     def activate_cheat(self):
         """Set the current players score to 99."""
         self._current_player.cheat()
+
+    def current_players_color(self):
+        """Return the current players color."""
+        return self._current_player.get_color()
