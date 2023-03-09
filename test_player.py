@@ -3,6 +3,7 @@
 import unittest
 import player
 import dice
+from colorama import Fore
 
 
 class test_player(unittest.TestCase):
@@ -18,7 +19,7 @@ class test_player(unittest.TestCase):
         p1 = player.Player("Fred", "blue")
 
         self.assertEqual(p1.get_name(), "Fred")
-        self.assertEqual(p1.get_color(), "blue")
+        self.assertEqual(p1.get_color(), Fore.BLUE)
         self.assertEqual(p1.get_total_score(), 0)
         self.assertEqual(p1.get_score(), 0)
 
@@ -40,14 +41,14 @@ class test_player(unittest.TestCase):
         """Check if player get correct set color."""
         p1 = player.Player("Fred", "blue")
 
-        self.assertEqual(p1.get_color(), "blue")
+        self.assertEqual(p1.get_color(), Fore.BLUE)
 
     def test_set_color(self):
         """Check if player set color works as intended."""
         p1 = player.Player("Fred", "blue")
 
         p1.set_color("red")
-        self.assertEqual(p1.get_color(), "red")
+        self.assertEqual(p1.get_color(), Fore.RED)
         self.assertRaises(ValueError, p1.set_color, "pink")
 
     def test_roll(self):

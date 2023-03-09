@@ -3,6 +3,7 @@ import unittest
 import game
 import player
 import difficulty
+from colorama import Fore
 
 
 class TestGame(unittest.TestCase):
@@ -17,7 +18,6 @@ class TestGame(unittest.TestCase):
         """Test initiation of game."""
         self.assertEqual(self.game._score_to_win, 100)
         self.assertEqual(self.game._number_of_players, "Not set")
-        self.assertEqual(self.game._text_color, "magenta")
         self.assertIsNotNone(self.game._die)
         self.assertIsNotNone(self.game._highscore)
 
@@ -51,8 +51,8 @@ class TestGame(unittest.TestCase):
         self.assertIsNotNone(self.game._pending_player)
         self.assertEqual(self.game._current_player.get_name(), name1)
         self.assertEqual(self.game._pending_player.get_name(), name2)
-        self.assertEqual(self.game._current_player.get_color(), "blue")
-        self.assertEqual(self.game._pending_player.get_color(), "red")
+        self.assertEqual(self.game._current_player.get_color(), Fore.BLUE)
+        self.assertEqual(self.game._pending_player.get_color(), Fore.GREEN)
 
     def test_is_winner(self):
         """Test the is_winner method."""
