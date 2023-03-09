@@ -32,12 +32,11 @@ python pig_game/main.py
 
 ## Running the Validators
 While still in the EXAM2 directory, you can run the validators by entering the following commands:
--```
+```
 make flake8
-
 make pylint
 ```
-
+```
 # You can run them all at the same time with 
 make lint
 ```
@@ -58,9 +57,11 @@ make test
 
 #Producing Documentation and UML Diagrams
 If you install graphviz, you should be able to use the following commands to produce documentation and UML diagrams:
-
-- ```
-make pdoc to produce documentation for the project.
+```
+# to produce documentation for the project
+make pdoc 
+```
+```
 make pyreverse to produce UML diagrams.
 ```
 
