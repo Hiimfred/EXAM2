@@ -1,5 +1,18 @@
 # Dice Pig Game
 
+## Rules
+Each turn, a player repeatedly rolls a die until either a 1 is rolled or the player decides to "hold":
+
+If the player rolls a 1, they score nothing and it becomes the next player's turn.
+If the player rolls any other number, it is added to their turn total and the player's turn continues.
+If a player chooses to "hold", their turn total is added to their score, and it becomes the next player's turn.
+The first player to score 100 or more points wins.
+
+For example, the first player, Donald, begins a turn with a roll of 5. Donald could hold and score 5 points, but chooses to roll again. Donald rolls a 2, and could hold with a turn total of 7 points, but chooses to roll again. Donald rolls a 1, and must end his turn without scoring. The next player, Alexis, rolls the sequence 4-5-3-5-6, after which she chooses to hold, and adds her turn total of 23 points to her score.
+
+Rules from wiki: https://en.wikipedia.org/wiki/Pig_(dice_game)
+
+
 ## Getting Started
 The following are instructions on how to install, run, and test our pig game.
 
@@ -28,6 +41,62 @@ make install
 ```
 python pig_game/main.py
 ```
+
+## Game commands!
+Starts a single player game with command:
+```
+# Enter one player name after typing solo
+solo <player name>
+```
+Starts a Multiplayer game with command:
+```
+# Enter two player names after typing multiplayer
+multiplayer <player name 1> <player name 2>
+```
+Change difficulty with the command:
+```
+# Switch between Easy and Hard difficulty
+change_difficulty
+```
+Roll the dice with the command:
+```
+# Rolls the dice. If player rolls one, pass turn
+roll
+```
+Hold your turn with the command:
+```
+# Hold to keep your accumulated score
+hold
+```
+If you want to be cheaky.. you can cheat with the command:
+```
+# Player score set to 99.. cheater..
+cheat
+```
+You can change color on your name with the command:
+```
+# Player can choose between red, blue, green, yellow, magenta, cyan
+color <enter the color>
+```
+If you want to reset and continue with same player(s):
+```
+# Continue with same player in a new round of pig game
+continue
+```
+To check the leaderboard:
+```
+# Display a leaderboard with player names and number of wins
+highscore
+```
+Exit the game with the command:
+```
+# Stores the score and exit the game
+quit
+```
+
+
+
+
 
 ## Running the Validators
 While still in the EXAM2 directory, you can run the validators by entering the following commands:
