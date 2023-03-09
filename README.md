@@ -17,15 +17,15 @@ make venv
 ```
 . .venv/Scripts/activate
 ```
-6. Activate the environment on Linux/Mac: 
+Activate the environment on Linux/Mac: 
 ```
 . .venv/bin/activate
 ```
-7. Use the following command to download all necessary plugins: 
+6. Use the following command to download all necessary plugins: 
 ```
 make install
 ```
-8. Run the game with the command: 
+7. Run the game with the command: 
 ```
 python pig_game/main.py
 ```
