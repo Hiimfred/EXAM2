@@ -90,7 +90,7 @@ unittest:
 
 coverage:
 	@$(call MESSAGE,$@)
-	coverage run -m unittest discover
+	coverage run -m unittest discover pig_game
 	coverage html
 	coverage report -m
 
