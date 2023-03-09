@@ -65,9 +65,9 @@ make pdoc
 make pyreverse to produce UML diagrams.
 ```
 
-To install graphviz on Windows, 
+To install graphviz on Windows, use the choco install graphviz command in PowerShell.
 ```
-use the choco install graphviz command in PowerShell.
+choco install graphviz
 ```
 To install on macOS, use the command.
 ```
