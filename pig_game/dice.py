@@ -26,9 +26,9 @@ class Dice:
         If it is then set the number of sides on the dice.
         Otherwise raise error.
         """
-        if (number_of_sides > 1):
+        if number_of_sides > 1:
             self._number_of_sides = number_of_sides
-        elif (number_of_sides < 1):
+        elif number_of_sides < 1:
             raise ValueError("Invalid input. Integer larger than 1 required.")
         else:
             raise TypeError("Wrong data type. Integer larger than 1 required.")

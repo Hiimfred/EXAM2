@@ -16,7 +16,7 @@ class Highscore:
 
     def add_entry(self, player: Player):
         """Add player to the highscore list or update their number of wins."""
-        if (player not in self._entries):
+        if player not in self._entries:
             self._entries.append(player)
         else:
             player_index = self._entries.index(player)
@@ -45,7 +45,7 @@ class Highscore:
 
     def not_empty(self):
         """Check if the highscore list is not empty."""
-        if (self._entries):
+        if self._entries:
             return True
         else:
             return False
