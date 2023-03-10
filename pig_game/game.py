@@ -75,7 +75,7 @@ class Game:
         msg = ""
 
         outcomes = self._bot.make_play(self._current_player)
-        if (1 in outcomes):
+        if 1 in outcomes:
             msg = "\n\tThe bot rolled a 1"
         else:
             msg = "\n\tThe bot rolled"
@@ -108,12 +108,12 @@ class Game:
         player_score = self._current_player.get_total_score()
         player_score += self._current_player.get_score()
 
-        if (player_score >= max_score):
+        if player_score >= max_score:
             _is_winner = True
             self._winner = self._current_player
             self._current_player.add_win()
             self._highscore.add_entry(self._current_player)
-        elif (self._bot.get_total_score() >= max_score):
+        elif self._bot.get_total_score() >= max_score:
             _is_winner = True
             self._winner = self._bot
         else:
@@ -146,7 +146,7 @@ class Game:
         """Reset the scores and start the game."""
         self._current_player.set_total_score(0)
 
-        if (self.get_number_of_players() == 1):
+        if self.get_number_of_players() == 1:
             self._bot.set_total_score(0)
         else:
             self._pending_player.set_total_score(0)
@@ -157,7 +157,7 @@ class Game:
         """If there is a highscore then return it."""
         msg = "\tThere are no highscores.\n"
 
-        if (self._highscore.not_empty()):
+        if self._highscore.not_empty():
             return self._highscore.get_highscore()
         else:
             return msg
@@ -170,7 +170,7 @@ class Game:
         """Change the difficulty of the bot to either EASY or HARD."""
         msg = ""
 
-        if (self._bot.get_difficulty() is Difficulty.EASY):
+        if self._bot.get_difficulty() is Difficulty.EASY:
             self._bot.set_difficulty(Difficulty.HARD)
             msg = "\tBot difficulty set to HARD.\n"
         else:
