@@ -1,6 +1,6 @@
 """Contains Highscore class."""
-from player import Player
 import pickle
+from player import Player
 
 
 class Highscore:
@@ -39,7 +39,7 @@ class Highscore:
         """Get the highscore list as a formatted string."""
         highscore = f"{'Name':^10} ---- {'Wins':^10}\n"
         for entry in self._entries:
-            highscore += entry.__str__() + "\n"
+            highscore += str(entry) + "\n"
 
         return highscore
 
@@ -47,5 +47,4 @@ class Highscore:
         """Check if the highscore list is not empty."""
         if self._entries:
             return True
-        else:
-            return False
+        return False

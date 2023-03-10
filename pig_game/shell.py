@@ -1,8 +1,8 @@
 """Contains Shell class."""
 import cmd
-import game
 from pyfiglet import figlet_format
 from colorama import Fore
+import game
 
 
 class Shell(cmd.Cmd):
@@ -38,10 +38,10 @@ class Shell(cmd.Cmd):
         if not arg:
             print(msg)
             return
-        else:
-            self.game.start_solo_game(arg)
-            name_in_color = self.game.current_players_color() + arg
-            self.prompt = f"({name_in_color + Fore.RED}) "
+
+        self.game.start_solo_game(arg)
+        name_in_color = self.game.current_players_color() + arg
+        self.prompt = f"({name_in_color + Fore.RED}) "
 
     def do_multiplayer(self, arg: str):
         """
@@ -57,14 +57,14 @@ class Shell(cmd.Cmd):
         args = arg.split()
         nr_args = len(args)
 
-        if (nr_args != 2):
+        if nr_args != 2:
             msg = "\tTwo arguments required: Player1_name Player2_name\n"
             print(msg)
             return
-        else:
-            self.game.start_multiplayer_game(args[0], args[1])
-            name_in_color = self.game.current_players_color() + args[0]
-            self.prompt = f"({name_in_color + Fore.RED}) "
+
+        self.game.start_multiplayer_game(args[0], args[1])
+        name_in_color = self.game.current_players_color() + args[0]
+        self.prompt = f"({name_in_color + Fore.RED}) "
 
     def do_roll(self, _):
         """
@@ -80,7 +80,7 @@ class Shell(cmd.Cmd):
         # Else if the outcome was not a 1 then the game checks for a winner.
         # If no winner is found the outcome of the roll is printed.
 
-        if (not self.game.game_is_running()):
+        if not self.game.game_is_running():
 
             msg = "\tStart a game before you roll.\n"
             print(msg)
@@ -88,17 +88,17 @@ class Shell(cmd.Cmd):
 
         msg, outcome = self.game.roll()
 
-        if (outcome == 1):
+        if outcome == 1:
             msg = "\tYou rolled a 1.. bummer!"
             print(msg)
 
             # This following part is basicly repeated in do_hold,
             # might be a good idea to make it into a method.
-            if (self.game.get_number_of_players() == 1):
+            if self.game.get_number_of_players() == 1:
                 bot_msg = self.game.begin_bot_turn()
                 print(bot_msg)
                 self.check_for_winner()
-            elif (self.game.get_number_of_players() == 2):
+            elif self.game.get_number_of_players() == 2:
                 swap_msg = self.game.pass_turn()
                 name = self.game.get_current_player_name()
                 name_in_color = self.game.current_players_color() + name
@@ -115,7 +115,7 @@ class Shell(cmd.Cmd):
         The turn will also be passed over to the bot or the next player.
         Checks for winner. Ends game if winner is found.
         """
-        if (not self.game.game_is_running()):
+        if not self.game.game_is_running():
             msg = "\tStart a game before you hold.\n"
             print(msg)
             return
@@ -124,13 +124,13 @@ class Shell(cmd.Cmd):
         print(hold_msg)
         self.check_for_winner()
 
-        if (not self.game.is_winner()):
+        if not self.game.is_winner():
 
-            if (self.game.get_number_of_players() == 1):
+            if self.game.get_number_of_players() == 1:
                 bot_msg = self.game.begin_bot_turn()
                 print(bot_msg)
                 self.check_for_winner()
-            elif (self.game.get_number_of_players() == 2):
+            elif self.game.get_number_of_players() == 2:
                 swap_msg = self.game.pass_turn()
                 name = self.game.get_current_player_name()
                 name_in_color = self.game.current_players_color() + name
@@ -175,7 +175,7 @@ class Shell(cmd.Cmd):
 
     def do_cheat(self, _):
         """Set score to 99."""
-        if (not self.game.game_is_running()):
+        if not self.game.game_is_running():
             msg = "\tStart a game before you cheat.\n"
             print(msg)
             return
@@ -189,22 +189,21 @@ class Shell(cmd.Cmd):
 
         Red, Blue, Green, Magenta, Yellow, Cyan.
         """
-        if (not self.game.game_is_running()):
+        if not self.game.game_is_running():
             msg = "\tStart a game before you change color.\n"
             print(msg)
             return
-        elif not arg:
+        if not arg:
             msg = "\tOne argument required: Color\n"
             print(msg)
             return
-        else:
-            try:
-                self.game.change_color(arg)
-                name = self.game.get_current_player_name()
-                name_in_color = self.game.current_players_color() + name
-                self.prompt = f"({name_in_color + Fore.RED}) "
-            except ValueError as ve:
-                print(ve)
+        try:
+            self.game.change_color(arg)
+            name = self.game.get_current_player_name()
+            name_in_color = self.game.current_players_color() + name
+            self.prompt = f"({name_in_color + Fore.RED}) "
+        except ValueError as _ve:
+            print(_ve)
 
     def check_for_winner(self):
         """
@@ -212,7 +211,7 @@ class Shell(cmd.Cmd):
 
         If there is a winner then display it.
         """
-        if (self.game.is_winner()):
+        if self.game.is_winner():
             winner = self.game.get_winner()
             print(f"\t{winner.get_name()} won the game!!\n")
             self.game.end_game()
