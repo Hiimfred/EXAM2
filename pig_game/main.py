@@ -1,3 +1,4 @@
+"""Welcome to our dice game."""
 import shell
 
 

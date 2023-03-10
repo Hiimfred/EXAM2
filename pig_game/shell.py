@@ -15,7 +15,7 @@ class Shell(cmd.Cmd):
     titel = figlet_format("PIG GAME", font="isometric3")
     print(Fore.RED + titel)
 
-    intro = "Welcome to the game. Type help or ? to list commands.\n"
+    intro = "Type help or ? to list commands.\n"
     prompt = "(game) "
 
     def __init__(self):
@@ -42,6 +42,8 @@ class Shell(cmd.Cmd):
             self.game.start_solo_game(arg)
             name_in_color = self.game.current_players_color() + arg
             self.prompt = f"({name_in_color + Fore.RED}) "
+    
+        return ""
 
     def do_multiplayer(self, arg: str):
         """
@@ -65,6 +67,8 @@ class Shell(cmd.Cmd):
             self.game.start_multiplayer_game(args[0], args[1])
             name_in_color = self.game.current_players_color() + args[0]
             self.prompt = f"({name_in_color + Fore.RED}) "
+
+        return ""
 
     def do_roll(self, _):
         """
@@ -108,6 +112,8 @@ class Shell(cmd.Cmd):
             print(msg)
             self.check_for_winner()
 
+        return ""
+
     def do_hold(self, _):
         """
         If a game is running then hold the players points.
@@ -137,6 +143,8 @@ class Shell(cmd.Cmd):
                 self.prompt = f"({name_in_color + Fore.RED}) "
                 print(swap_msg)
 
+        return ""
+
     def do_continue(self, _):
         """
         If there is a game to continue then reset the score and start over.
@@ -150,11 +158,13 @@ class Shell(cmd.Cmd):
             msg = "\tThere is no game to continue. Finish a game first!\n"
 
         print(msg)
+        return ""
 
     def do_highscore(self, _):
         """Print the highscore list."""
         msg = self.game.display_highscore()
         print(msg)
+        return ""
 
     def do_change_difficulty(self, _):
         """
@@ -164,6 +174,7 @@ class Shell(cmd.Cmd):
         """
         msg = self.game.new_difficulty()
         print(msg)
+        return ""
 
     def do_quit(self, _):
         """Save highscores and quits the game."""
@@ -181,6 +192,7 @@ class Shell(cmd.Cmd):
         msg = "You cheater.. your score is set to 99.."
         print(msg)
         self.game.activate_cheat()
+        return ""
 
     def do_color(self, arg):
         """
@@ -204,6 +216,7 @@ class Shell(cmd.Cmd):
                 self.prompt = f"({name_in_color + Fore.RED}) "
             except ValueError as ve:
                 print(ve)
+        return ""
 
     def check_for_winner(self):
         """
@@ -215,3 +228,4 @@ class Shell(cmd.Cmd):
             winner = self.game.get_winner()
             print(f"\t{winner.get_name()} won the game!!\n")
             self.game.end_game()
+        return ""
