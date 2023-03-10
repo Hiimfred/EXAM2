@@ -52,7 +52,7 @@ class Game:
         self._game_started = True
         self._current_player = Player(name, "blue")
         self.set_number_of_players(1)
-        return
+        # return
 
     def start_multiplayer_game(self, name1, name2):
         """Initiate a game with two players."""
@@ -60,7 +60,7 @@ class Game:
         self._current_player = Player(name1, "blue")
         self._pending_player = Player(name2, "green")
         self.set_number_of_players(2)
-        return
+        # return
 
     def roll(self):
         """Roll the current players dice, return message and outcome."""
