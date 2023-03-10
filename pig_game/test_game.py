@@ -16,8 +16,8 @@ class TestGame(unittest.TestCase):
 
     def test_game__init__(self):
         """Test initiation of game."""
-        self.assertEqual(self.game._score_to_win, 100)
-        self.assertEqual(self.game._number_of_players, "Not set")
+        self.assertEqual(self.game.get_score_to_win(), 100)
+        self.assertEqual(self.game.get_number_of_players(), "Not set")
         self.assertIsNotNone(self.game._die)
         self.assertIsNotNone(self.game._highscore)
 
@@ -46,7 +46,7 @@ class TestGame(unittest.TestCase):
 
         self.game.start_multiplayer_game(name1, name2)
         self.assertTrue(self.game.game_is_running())
-        self.assertEqual(self.game._number_of_players, 2)
+        self.assertEqual(self.game.get_number_of_players(), 2)
         self.assertIsNotNone(self.game._current_player)
         self.assertIsNotNone(self.game._pending_player)
         self.assertEqual(self.game._current_player.get_name(), name1)
@@ -76,7 +76,7 @@ class TestGame(unittest.TestCase):
         self.game.end_game()
 
         self.assertFalse(self.game._game_started)
-        self.assertTrue(self.game._prior_game)
+        self.assertTrue(self.game.is_prior_game())
 
     def test_is_prior_game(self):
         """Test is_prior_game method."""
