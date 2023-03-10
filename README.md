@@ -1,7 +1,7 @@
 # Dice Pig Game
 
 ## Rules
-Each turn, a player repeatedly rolls a die until either a 1 is rolled or the player decides to "hold":
+Each turn, a player repeatedly rolls a dice until either a 1 is rolled or the player decides to "hold":
 
 If the player rolls a 1, they score nothing and it becomes the next player's turn.
 If the player rolls any other number, it is added to their turn total and the player's turn continues.
@@ -70,7 +70,7 @@ Hold your turn with the command:
 # Hold to keep your accumulated score
 hold
 ```
-If you want to be cheaky.. you can cheat with the command:
+If you want to be cheeky.. you can cheat with the command:
 ```
 # Player score set to 99.. cheater..
 cheat

@@ -11,7 +11,7 @@ class TestGame(unittest.TestCase):
 
     def setUp(self):
         """Set up objects for testing."""
-        self.p1 = player.Player("bob", "blue")
+        self.test_player = player.Player("bob", "blue")
         self.game = game.Game()
 
     def test_game__init__(self):
@@ -105,14 +105,14 @@ class TestGame(unittest.TestCase):
     def test_game_is_running(self):
         """Test that game run and ends correctly."""
         self.assertFalse(self.game.game_is_running())
-        self.game.start_solo_game(self.p1)
+        self.game.start_solo_game(self.test_player)
         self.assertTrue(self.game.game_is_running())
         self.game.end_game()
         self.assertFalse(self.game.game_is_running())
 
     def test_activate_cheat(self):
         """Test activate_cheat to see that it adds 99 point."""
-        self.game.start_solo_game(self.p1)
+        self.game.start_solo_game(self.test_player)
 
         start_score = self.game._current_player.get_total_score()
         self.game.activate_cheat()
