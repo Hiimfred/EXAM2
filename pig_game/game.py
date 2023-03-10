@@ -30,7 +30,7 @@ class Game:
 
     def set_number_of_players(self, number_of_players: int):
         """Change the number of players in the game."""
-        if (number_of_players == 1 or number_of_players == 2):
+        if number_of_players in (1, 2):
             self._number_of_players = number_of_players
         else:
             raise ValueError("Invalid input. There can only be 1-2 players.")
@@ -159,8 +159,7 @@ class Game:
 
         if self._highscore.not_empty():
             return self._highscore.get_highscore()
-        else:
-            return msg
+        return msg
 
     def call_save_highscore(self):
         """Save the highscore."""

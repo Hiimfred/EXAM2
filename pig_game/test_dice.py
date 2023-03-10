@@ -32,7 +32,7 @@ class TestDice(unittest.TestCase):
         die = dice.Dice()
         nr_sides = die.get_number_of_sides()
 
-        for i in range(10):
+        for _ in range(10):
             out = die.roll_dice()
             self.assertTrue(out >= 1 and out <= nr_sides)
 

@@ -48,3 +48,7 @@ class Highscore:
         if self._entries:
             return True
         return False
+
+    def get_entries(self):
+        """Return the entries."""
+        return self._entries
