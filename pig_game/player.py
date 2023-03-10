@@ -1,6 +1,6 @@
 """Contains a player class."""
-from dice import Dice
 from colorama import Fore
+from dice import Dice
 
 
 class Player():
@@ -50,17 +50,17 @@ class Player():
         """Get the player color."""
         fore_color = "Not set"
 
-        if (self._color == "red"):
+        if self._color == "red":
             fore_color = Fore.RED
-        elif (self._color == "blue"):
+        elif self._color == "blue":
             fore_color = Fore.BLUE
-        elif (self._color == "green"):
+        elif self._color == "green":
             fore_color = Fore.GREEN
-        elif (self._color == "magenta"):
+        elif self._color == "magenta":
             fore_color = Fore.MAGENTA
-        elif (self._color == "yellow"):
+        elif self._color == "yellow":
             fore_color = Fore.YELLOW
-        elif (self._color == "cyan"):
+        elif self._color == "cyan":
             fore_color = Fore.CYAN
 
         return fore_color
@@ -68,7 +68,7 @@ class Player():
     def set_color(self, new_color):
         """Set the player chosen color."""
         new_color = str.lower(new_color)
-        if (new_color in self.color_list):
+        if new_color in self.color_list:
             self._color = new_color
         else:
             raise ValueError("Enter on of the following colors: " +

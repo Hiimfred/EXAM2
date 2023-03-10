@@ -23,7 +23,7 @@ class Intelligence:
 
     def set_name(self, name: str):
         """Set a new name for this Intelligence object."""
-        if (isinstance(name, str)):
+        if isinstance(name, str):
             self._name = name
         else:
             raise TypeError("Name must be a string.")
@@ -34,7 +34,7 @@ class Intelligence:
 
     def set_turn_score(self, score: int):
         """Set the score for this round for this Intelligence object."""
-        if (isinstance(score, int)):
+        if isinstance(score, int):
             self._turn_score = score
         else:
             raise TypeError("Turn score must be an integer.")
@@ -45,7 +45,7 @@ class Intelligence:
 
     def set_total_score(self, total_score: int):
         """Set the total score for this Intelligence object."""
-        if (isinstance(total_score, int)):
+        if isinstance(total_score, int):
             self._total_score = total_score
         else:
             raise TypeError("Total score must be an integer.")
@@ -56,7 +56,7 @@ class Intelligence:
 
     def set_color(self, color: str):
         """Set a new color for this Intelligence object."""
-        if (isinstance(color, str)):
+        if isinstance(color, str):
             self._color = color
         else:
             raise TypeError("Color must be a string.")
@@ -97,13 +97,13 @@ class Intelligence:
         npc_score = self.get_total_score()
         op_lead = player.get_total_score() - self.get_total_score()
         npc_lead = self.get_total_score() - player.get_total_score()
-        if (op_score > npc_score):
+        if op_score > npc_score:
             score_left = 100 - op_score
         else:
             score_left = 100 - npc_score
 
         # The EASY NPC always throws 2 times.
-        if (self._difficulty_setting is Difficulty.EASY):
+        if self._difficulty_setting is Difficulty.EASY:
             throws = 2
 
         # The HARD NPC atempts to play smarter
@@ -111,38 +111,38 @@ class Intelligence:
 
         # Here the number of throws the NPC
         # should make is determined.
-        elif (self._difficulty_setting is Difficulty.HARD):
-            if (npc_score == 0):
+        elif self._difficulty_setting is Difficulty.HARD:
+            if npc_score == 0:
                 throws = 3
-            elif (score_left < 20):
-                if (op_lead >= 10):
+            elif score_left < 20:
+                if op_lead >= 10:
                     throws = 9
-                elif (npc_lead >= 10):
+                elif npc_lead >= 10:
                     throws = 5
                 else:
                     throws = 7
-            elif (score_left < 30):
-                if (op_lead >= 10):
+            elif score_left < 30:
+                if op_lead >= 10:
                     throws = 7
-                elif (npc_lead >= 10):
+                elif npc_lead >= 10:
                     throws = 4
                 else:
                     throws = 6
-            elif (score_left < 50):
-                if (op_lead >= 10):
+            elif score_left < 50:
+                if op_lead >= 10:
                     throws = 5
-                elif (npc_lead >= 10):
+                elif npc_lead >= 10:
                     throws = 3
                 else:
                     throws = 4
             else:
-                if (op_lead >= 20):
+                if op_lead >= 20:
                     throws = 6
-                elif (npc_lead >= 20):
+                elif npc_lead >= 20:
                     throws = 3
-                elif (op_lead >= 10):
+                elif op_lead >= 10:
                     throws = 5
-                elif (npc_lead >= 10):
+                elif npc_lead >= 10:
                     throws = 4
                 else:
                     throws = 3
@@ -162,13 +162,13 @@ class Intelligence:
             _rolls_this_turn += 1
             list_of_outcomes.append(outcome)
 
-            if (outcome != 1):
+            if outcome != 1:
                 self._turn_score += outcome
             else:
                 self._turn_score = 0
                 _run = False
 
-            if (self._total_score + self._turn_score >= 100):
+            if self._total_score + self._turn_score >= 100:
                 _run = False
 
         self._total_score += self.get_turn_score()
